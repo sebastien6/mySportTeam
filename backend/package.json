@@ -1,0 +1,41 @@
+{
+  "name": "my-sport-team-app",
+  "version": "1.0.0",
+  "description": "Serverless My Sport TEam app",
+  "dependencies": {
+    "@types/http-errors": "^1.6.3",
+    "aws-xray-sdk": "^3.0.0",
+    "axios": "^0.19.2",
+    "elasticsearch": "^16.7.1",
+    "http-aws-es": "^6.0.0",
+    "http-errors": "^1.7.3",
+    "jsonwebtoken": "^8.5.1",
+    "jwks-rsa": "^1.8.0",
+    "middy": "^0.36.0",
+    "source-map-support": "^0.5.19",
+    "uuid": "^8.0.0",
+    "winston": "^3.2.1"
+  },
+  "devDependencies": {
+    "@types/aws-lambda": "^8.10.51",
+    "@types/elasticsearch": "^5.0.36",
+    "@types/jsonwebtoken": "^8.3.9",
+    "@types/node": "^13.13.4",
+    "aws-sdk": "^2.668.0",
+    "jest": "^25.5.4",
+    "serverless-aws-documentation": "^1.1.0",
+    "serverless-iam-roles-per-function": "^2.0.2",
+    "serverless-offline": "^6.1.4",
+    "serverless-dynamodb-local": "^0.2.39",
+    "serverless-offline-sns": "^0.68.0",
+    "serverless-s3-local": "^0.6.1",
+    "serverless-plugin-canary-deployments": "^0.4.8",
+    "serverless-plugin-tracing": "^2.0.0",
+    "serverless-webpack": "^5.3.1",
+    "ts-loader": "^7.0.2",
+    "typescript": "^3.8.3",
+    "webpack": "^4.43.0"
+  },
+  "author": "Sebastien Durand",
+  "license": "MIT"
+}
