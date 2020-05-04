@@ -1,0 +1,27 @@
+{
+    "$schema": "http://json-schema.org/draft-04/schema#",
+    "title": "team",
+    "type": "object",
+    "properties": {
+      "name": {
+        "type": "string"
+      },
+      "sport": {
+        "type": "string"
+      },
+      "season": {
+        "type": "string"
+      },
+      "retired": {
+        "type": "boolean"
+      }
+    },
+    "required": [
+        "name",
+        "sport",
+        "season",
+        "retired"
+      ],
+    "additionalProperties": false
+  }
+  
