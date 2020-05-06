@@ -1,8 +1,6 @@
-import * as AWS from 'aws-sdk';
-import * as AWSXRay from 'aws-xray-sdk';
-//const AWSXRay = require('aws-xray-sdk');
 import { DocumentClient } from 'aws-sdk/clients/dynamodb';
 
+import { createDynamoDBClient } from './client'
 import {TeamItem, TeamUpdate } from '../models/teamItem';
 import { createLogger } from '../utils/logger';
 
@@ -54,7 +52,7 @@ export class TeamAccess {
             TableName: this.teamsTable,
             Item: team
         }
-        logger.info('Processing db create item with params', {params: params})
+        logger.info('Processing db create team with params', {params: params})
         
         await this.docClient.put(params).promise()
         logger.info('team successfully created')
@@ -111,30 +109,18 @@ export class TeamAccess {
                 todoId: teamId
             },
             UpdateExpression:
-                'set attachmentUrl = :attachmentUrl',
+                'set teamPicture = :teamPicture',
             ExpressionAttributeValues: {
-                ':attachmentUrl': attachmentUrl
+                ':teamPicture': attachmentUrl
             },
             ReturnValues: 'UPDATED_NEW',
         }
         logger.info('Processing db update to add attachment to item', {params: params})
-        const res = await this.docClient.update(params).promise();
         
+        const res = await this.docClient.update(params).promise();
         logger.info('team updated attachment successful', {item: res.Attributes});
     }
 }
 
-function createDynamoDBClient() {
-    if (process.env.IS_OFFLINE) {
-        console.log('Creating a local DynamoDB instance')
-        console.log("Serverless Offline detected; skipping AWS X-Ray setup")
-        return new AWS.DynamoDB.DocumentClient({
-            region: 'localhost',
-            endpoint: 'http://localhost:8000'
-        })
-    }
 
-    const XAWS = AWSXRay.captureAWS(AWS);
-    return new XAWS.DynamoDB.DocumentClient()
-}
   

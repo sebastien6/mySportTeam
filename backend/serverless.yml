@@ -14,7 +14,7 @@ plugins:
   
 
 custom:
-  topicName: imagesTopic-${self:provider.stage}
+  topicName: teamImagesTopic-${self:provider.stage}
   webpack:
     webpackConfig: ./webpack.config.js
     includeModules: true
@@ -35,6 +35,12 @@ custom:
       port: 8000
       inMemory: true
       migrate: true
+      seed: true
+    seed:
+      domain:
+        sources:
+          - table: ${self:provider.environment.TEAMS_TABLE}
+            sources: [./seed.json]
   serverless-offline-sns:
     port: 4002 # a free port for the sns server to run on
     debug: false
@@ -53,6 +59,7 @@ provider:
     TEAMS_TABLE: Team-${self:provider.stage}
     CONNECTIONS_TABLE: connections-${self:provider.stage}
     CREATED_AT_INDEX: CreatedAtIndex
+    GSI1_INDEX: Gsi1Index
     IMAGES_S3_BUCKET: seb6-mysportteam-images-${self:provider.stage}
     SIGNED_URL_EXPIRATION: 300
     # DOMAIN: dev-bquc1kgl.auth0.com
@@ -72,7 +79,7 @@ functions:
   #   handler: src/lambda/auth/auth0Authorizer.handler
 
   GetTeams:
-    handler: src/lambda/http/team/getTeams.handler
+    handler: src/lambda/http/teams/getTeams.handler
     events:
       - http:
           method: get
@@ -95,7 +102,7 @@ functions:
         Resource: arn:aws:dynamodb:${self:provider.region}:*:table/${self:provider.environment.TEAMS_TABLE}/index/${self:provider.environment.CREATED_AT_INDEX}
 
   GetTeam:
-    handler: src/lambda/http/team/getTeam.handler
+    handler: src/lambda/http/teams/getTeam.handler
     events:
       - http:
           method: get
@@ -113,8 +120,8 @@ functions:
           - dynamodb:Query
         Resource: arn:aws:dynamodb:${self:provider.region}:*:table/${self:provider.environment.TEAMS_TABLE}
       
-  CreateTodo:
-    handler: src/lambda/http/team/createTeam.handler
+  CreateTeam:
+    handler: src/lambda/http/teams/createTeam.handler
     events:
       - http:
           method: post
@@ -136,8 +143,8 @@ functions:
           - dynamodb:PutItem
         Resource: arn:aws:dynamodb:${self:provider.region}:*:table/${self:provider.environment.TEAMS_TABLE}
 
-  UpdateTodo:
-    handler: src/lambda/http/team/updateTeam.handler
+  UpdateTeam:
+    handler: src/lambda/http/teams/updateTeam.handler
     events:
       - http:
           method: patch
@@ -159,8 +166,8 @@ functions:
           - dynamodb:UpdateItem
         Resource: arn:aws:dynamodb:${self:provider.region}:*:table/${self:provider.environment.TEAMS_TABLE}
         
-  DeleteTodo:
-    handler: src/lambda/http/team/deleteTeam.handler
+  DeleteTeam:
+    handler: src/lambda/http/teams/deleteTeam.handler
     events:
       - http:
           method: delete
@@ -175,6 +182,213 @@ functions:
     deploymentSettings:
       type: Canary10Percent5Minutes
       alias: Live
+
+  GetPlayer:
+    handler: src/lambda/http/players/getPlayer.handler
+    events:
+      - http:
+          method: get
+          path: players/{playerId}
+          cors: true
+          # authorizer: Auth
+    deploymentSettings:
+      type: Canary10Percent5Minutes
+      alias: Live
+    iamRoleStatements:
+      - Effect: Allow
+        Action:
+          - dynamodb:Scan
+          - dynamodb:GetItem
+          - dynamodb:Query
+        Resource: arn:aws:dynamodb:${self:provider.region}:*:table/${self:provider.environment.TEAMS_TABLE}
+
+  GetPlayers:
+    handler: src/lambda/http/players/getPlayers.handler
+    events:
+      - http:
+          method: get
+          path: players
+          cors: true
+          # authorizer: Auth
+    deploymentSettings:
+      type: Canary10Percent5Minutes
+      alias: Live
+    iamRoleStatements:
+      - Effect: Allow
+        Action:
+          - dynamodb:Scan
+          - dynamodb:GetItem
+          - dynamodb:Query
+        Resource: arn:aws:dynamodb:${self:provider.region}:*:table/${self:provider.environment.TEAMS_TABLE}
+      # - Effect: Allow
+      #   Action:
+      #     - dynamodb:Query
+      #   Resource: arn:aws:dynamodb:${self:provider.region}:*:table/${self:provider.environment.TEAMS_TABLE}/index/${self:provider.environment.CREATED_AT_INDEX}
+
+  GetPlayersInTeam:
+    handler: src/lambda/http/players/getPlayersInTeam.handler
+    events:
+      - http:
+          method: get
+          path: teams/{teamId}/players
+          cors: true
+          # authorizer: Auth
+    deploymentSettings:
+      type: Canary10Percent5Minutes
+      alias: Live
+    iamRoleStatements:
+      - Effect: Allow
+        Action:
+          - dynamodb:Scan
+          - dynamodb:GetItem
+          - dynamodb:Query
+        Resource: arn:aws:dynamodb:${self:provider.region}:*:table/${self:provider.environment.TEAMS_TABLE}
+      - Effect: Allow
+        Action:
+          - dynamodb:Query
+        Resource: arn:aws:dynamodb:${self:provider.region}:*:table/${self:provider.environment.TEAMS_TABLE}/index/${self:provider.environment.GSI1_INDEX}
+    
+  CreatePlayer:
+    handler: src/lambda/http/players/createPlayer.handler
+    events:
+      - http:
+          method: post
+          path: players
+          # authorizer: Auth
+          cors: true
+          request:
+            schema:
+              application/json: ${file(models/create-player-request.json)}
+          documentation:
+            summary: Create a new player item
+            description: Create a new player
+    deploymentSettings:
+      type: Canary10Percent5Minutes
+      alias: Live
+    iamRoleStatements:
+      - Effect: Allow
+        Action:
+          - dynamodb:PutItem
+        Resource: arn:aws:dynamodb:${self:provider.region}:*:table/${self:provider.environment.TEAMS_TABLE}
+
+  DeletePlayer:
+    handler: src/lambda/http/players/deletePlayer.handler
+    events:
+      - http:
+          method: delete
+          path: players/{teamId}
+          # authorizer: Auth
+          cors: true
+    iamRoleStatements:
+      - Effect: Allow
+        Action:
+          - dynamodb:DeleteItem
+        Resource: arn:aws:dynamodb:${self:provider.region}:*:table/${self:provider.environment.TEAMS_TABLE}
+    deploymentSettings:
+      type: Canary10Percent5Minutes
+      alias: Live
+
+  GetGame:
+    handler: src/lambda/http/games/getGame.handler
+    events:
+      - http:
+          method: get
+          path: games/{playerId}
+          cors: true
+          # authorizer: Auth
+    deploymentSettings:
+      type: Canary10Percent5Minutes
+      alias: Live
+    iamRoleStatements:
+      - Effect: Allow
+        Action:
+          - dynamodb:Scan
+          - dynamodb:GetItem
+          - dynamodb:Query
+        Resource: arn:aws:dynamodb:${self:provider.region}:*:table/${self:provider.environment.TEAMS_TABLE}
+
+  GetGames:
+    handler: src/lambda/http/games/getGames.handler
+    events:
+      - http:
+          method: get
+          path: games
+          cors: true
+          # authorizer: Auth
+    deploymentSettings:
+      type: Canary10Percent5Minutes
+      alias: Live
+    iamRoleStatements:
+      - Effect: Allow
+        Action:
+          - dynamodb:Scan
+          - dynamodb:GetItem
+          - dynamodb:Query
+        Resource: arn:aws:dynamodb:${self:provider.region}:*:table/${self:provider.environment.TEAMS_TABLE}
+      
+  GetGamesForTeam:
+    handler: src/lambda/http/games/GetGamesForTeam.handler
+    events:
+      - http:
+          method: get
+          path: teams/{teamId}/games
+          cors: true
+          # authorizer: Auth
+    deploymentSettings:
+      type: Canary10Percent5Minutes
+      alias: Live
+    iamRoleStatements:
+      - Effect: Allow
+        Action:
+          - dynamodb:Scan
+          - dynamodb:GetItem
+          - dynamodb:Query
+        Resource: arn:aws:dynamodb:${self:provider.region}:*:table/${self:provider.environment.TEAMS_TABLE}
+      - Effect: Allow
+        Action:
+          - dynamodb:Query
+        Resource: arn:aws:dynamodb:${self:provider.region}:*:table/${self:provider.environment.TEAMS_TABLE}/index/${self:provider.environment.GSI1_INDEX}
+    
+  CreateGame:
+    handler: src/lambda/http/games/createGame.handler
+    events:
+      - http:
+          method: post
+          path: games
+          # authorizer: Auth
+          cors: true
+          request:
+            schema:
+              application/json: ${file(models/create-game-request.json)}
+          documentation:
+            summary: Create a new game item
+            description: Create a new game
+    deploymentSettings:
+      type: Canary10Percent5Minutes
+      alias: Live
+    iamRoleStatements:
+      - Effect: Allow
+        Action:
+          - dynamodb:PutItem
+        Resource: arn:aws:dynamodb:${self:provider.region}:*:table/${self:provider.environment.TEAMS_TABLE}
+
+  DeleteGame:
+    handler: src/lambda/http/games/deleteGame.handler
+    events:
+      - http:
+          method: delete
+          path: games/{teamId}
+          # authorizer: Auth
+          cors: true
+    iamRoleStatements:
+      - Effect: Allow
+        Action:
+          - dynamodb:DeleteItem
+        Resource: arn:aws:dynamodb:${self:provider.region}:*:table/${self:provider.environment.TEAMS_TABLE}
+    deploymentSettings:
+      type: Canary10Percent5Minutes
+      alias: Live
+      
 
   GenerateUploadUrl:
     handler: src/lambda/http/team/generateUploadUrl.handler
@@ -260,6 +474,26 @@ functions:
 
 resources:
   Resources:
+    GatewayResponseDefault4XX:
+      Type: 'AWS::ApiGateway::GatewayResponse'
+      Properties:
+        ResponseParameters:
+           gatewayresponse.header.Access-Control-Allow-Origin: "'*'"
+           gatewayresponse.header.Access-Control-Allow-Headers: "'*'"
+        ResponseType: DEFAULT_4XX
+        RestApiId:
+          Ref: 'ApiGatewayRestApi'
+
+    GatewayResponseDefault5XX:
+      Type: 'AWS::ApiGateway::GatewayResponse'
+      Properties:
+        ResponseParameters:
+           gatewayresponse.header.Access-Control-Allow-Origin: "'*'"
+           gatewayresponse.header.Access-Control-Allow-Headers: "'*'"
+        ResponseType: DEFAULT_5XX
+        RestApiId:
+          Ref: 'ApiGatewayRestApi'
+
     MyTeamDynamoDBTable:
       Type: AWS::DynamoDB::Table
       Properties:
@@ -267,6 +501,8 @@ resources:
           - AttributeName: PK
             AttributeType: S
           - AttributeName: SK
+            AttributeType: S
+          - AttributeName: GSI1
             AttributeType: S
           - AttributeName: createdAt
             AttributeType: S
@@ -284,6 +520,18 @@ resources:
                 KeyType: RANGE
             Projection:
               ProjectionType: ALL
+        GlobalSecondaryIndexes:
+          - IndexName: ${self:provider.environment.GSI1_INDEX}
+            KeySchema:
+              - AttributeName: GSI1
+                KeyType: HASH
+              - AttributeName: SK
+                KeyType: RANGE
+            Projection:
+              ProjectionType: ALL
+            ProvisionedThroughput:
+              ReadCapacityUnits: '5'
+              WriteCapacityUnits: '5'
         # StreamSpecification:
         #   StreamViewType: NEW_IMAGE
         ProvisionedThroughput: 

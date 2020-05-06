@@ -5,22 +5,20 @@ import { cors, httpErrorHandler } from 'middy/middlewares'
 
 // import { getUserId } from '../utils'
 import { createLogger } from '../../../utils/logger'
-import { getTeam } from '../../../businessLogic/teams'
-//import { getUserId } from '../utils'
+import { getAllPlayers } from '../../../businessLogic/player'
 
 const logger = createLogger('api')
 
-export const getTodoHandler: APIGatewayProxyHandler = async (event: APIGatewayProxyEvent): Promise<APIGatewayProxyResult> => {
+export const getPlayersHandler: APIGatewayProxyHandler = async (event: APIGatewayProxyEvent): Promise<APIGatewayProxyResult> => {
   logger.info('Processing event', {
-    func: 'getTodohandler',
+    func: 'getPlayerHandler',
     event: event
   })
-  const teamId = event.pathParameters.teamId;
   //const userId = getUserId(event)
   const id = 'google-oauth2|114715338908998513605'
   const userId = `user_${id}`
 
-  const items = await getTeam(userId, teamId)
+  const items = await getAllPlayers(userId)
   return {
     statusCode: 200,
     headers: {
@@ -33,6 +31,6 @@ export const getTodoHandler: APIGatewayProxyHandler = async (event: APIGatewayPr
   };
 }
 
-export const handler = middy(getTodoHandler)
+export const handler = middy(getPlayersHandler)
   .use(httpErrorHandler())
   .use(cors({ credentials: true }));

@@ -1,0 +1,70 @@
+[
+    {
+        "SK": "team_0c11415f-95d9-4ba5-be5c-6c384ae86f1c",
+        "PK": "user_google-oauth2|123456789",
+        "season": "2019",
+        "name": "The Dark Warriors",
+        "retired": true,
+        "sport": "football"
+    },
+    {
+        "season": "2019",
+        "createdAt": "2020-05-04T16:06:25.675Z",
+        "SK": "team_150ba316-ff20-4832-9e93-6df136d7138e",
+        "PK": "user_google-oauth2|123456789",
+        "name": "The Blue Jays",
+        "retired": true,
+        "sport": "baseball"
+    },
+    {
+        "season": "2020",
+        "createdAt": "2020-05-04T16:06:30.828Z",
+        "SK": "team_287d9159-69a0-4958-a413-b1b38f99fae7",
+        "PK": "user_google-oauth2|123456789",
+        "name": "The Blue Jays",
+        "retired": false,
+        "sport": "baseball"
+    },
+    {
+        "season": "2020-2021",
+        "createdAt": "2020-05-04T18:13:30.889Z",
+        "SK": "team_d41f893d-6a82-4051-beea-e0036691392a",
+        "PK": "user_google-oauth2|123456789",
+        "name": "The ringers",
+        "retired": false,
+        "sport": "ringette"
+    },
+    {
+        "createdAt": "2020-05-06T00:08:24.493Z",
+        "firstName": "Bilbo",
+        "lastName": "Baggins",
+        "GSI1": "team_287d9159-69a0-4958-a413-b1b38f99fae7",
+        "SK": "player_00e29602-bfe7-47ce-a596-3a912f032ad7",
+        "jerseyNumber": 9,
+        "PK": "user_google-oauth2|123456789",
+        "position": "center",
+        "yearOfBirth": 2005
+    },
+    {
+        "createdAt": "2020-05-06T00:08:51.373Z",
+        "firstName": "Frodo",
+        "lastName": "Baggins",
+        "GSI1": "team_287d9159-69a0-4958-a413-b1b38f99fae7",
+        "SK": "player_22de7442-4dd8-4539-ad2f-66f25dc40f0d",
+        "jerseyNumber": 13,
+        "PK": "user_google-oauth2|123456789",
+        "position": "defense",
+        "yearOfBirth": 2006
+    },
+    {
+        "createdAt": "2020-05-06T00:07:32.848Z",
+        "firstName": "Sauron",
+        "lastName": "Dark",
+        "GSI1": "team_0c11415f-95d9-4ba5-be5c-6c384ae86f1c",
+        "SK": "player_fe090bb0-6d2e-4ec1-ad86-95af1861d343",
+        "jerseyNumber": 9,
+        "PK": "user_google-oauth2|123456789",
+        "position": "center",
+        "yearOfBirth": 2005
+    }
+]

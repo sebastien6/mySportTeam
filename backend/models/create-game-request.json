@@ -1,0 +1,33 @@
+{
+    "$schema": "http://json-schema.org/draft-04/schema#",
+    "title": "team",
+    "type": "object",
+    "properties": {
+      "teamId": {
+        "type": "string"
+      },
+      "opponentTeam": {
+        "type": "string"
+      },
+      "teamScore": {
+        "type": "number"
+      },
+      "opponentScore": {
+        "type": "number"
+      },
+      "location": {
+        "type": "string"
+      },
+      "date": {
+        "type": "string"
+      }
+    },
+    "required": [
+      "teamId",
+      "opponentTeam",
+      "location",
+      "date"
+    ],
+    "additionalProperties": false
+  }
+  

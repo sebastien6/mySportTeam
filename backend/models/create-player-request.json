@@ -1,0 +1,33 @@
+{
+    "$schema": "http://json-schema.org/draft-04/schema#",
+    "title": "team",
+    "type": "object",
+    "properties": {
+      "teamId": {
+        "type": "string"
+      },
+      "firstName": {
+        "type": "string"
+      },
+      "lastName": {
+        "type": "string"
+      },
+      "yearOfBirth": {
+        "type": "string"
+      },
+      "jerseyNumber": {
+        "type": "string"
+      },
+      "position": {
+        "type": "string"
+      }
+    },
+    "required": [
+      "teamId",
+      "firstName",
+      "lastName",
+      "yearOfBirth"
+    ],
+    "additionalProperties": false
+  }
+  
