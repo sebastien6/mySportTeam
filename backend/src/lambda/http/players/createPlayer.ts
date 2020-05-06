@@ -21,6 +21,14 @@ const createPlayerHandler: APIGatewayProxyHandler = async (event: APIGatewayProx
   const id = 'google-oauth2|114715338908998513605'
   const userId = `user_${id}`
 
+  // if (!newPlayer.jerseyNumber) {
+  //   newPlayer.jerseyNumber = 0
+  // }
+
+  // if (!newPlayer.position) {
+  //   newPlayer.position = ""
+  // }
+
   const item = await createPlayer(userId, newPlayer);
 
   return {

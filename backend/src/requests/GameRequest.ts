@@ -12,8 +12,8 @@ export interface CreateGameRequest {
 
 export interface UpdateGameRequest {
     opponentTeam: string
-    teamScore?: number
-    opponentScore?: number
+    teamScore: number
+    opponentScore: number
     location: string
     date: string
 }

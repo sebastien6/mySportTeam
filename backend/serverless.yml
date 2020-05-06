@@ -293,7 +293,7 @@ functions:
     events:
       - http:
           method: get
-          path: games/{playerId}
+          path: games/{gameId}
           cors: true
           # authorizer: Auth
     deploymentSettings:

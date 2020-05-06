@@ -1,9 +1,9 @@
-import * as uuid from 'uuid';
-
-import { GameItem } from '../models/gameItem';
-import { GameAccess } from '../dataLayer/gameAccess';
-// import { getUploadUrl } from '../dataLayer/s3Bucket';
-import { CreateGameRequest } from '../requests/GameRequest';
+import * as uuid from 'uuid'
+import { GameItem } from '../models/gameItem'
+import { GameAccess } from '../dataLayer/gameAccess'
+// import { getUploadUrl } from '../dataLayer/s3Bucket'
+import { CreateGameRequest } from '../requests/GameRequest'
+import { IsValid } from '../dataLayer/validKeyExist'
 
 const gameAccess = new GameAccess();
 
@@ -20,6 +20,9 @@ export async function getGame(userId: string, gameId: string): Promise<GameItem>
 }
 
 export async function createGame(userId: string, request: CreateGameRequest): Promise<GameItem> {
+    if (!IsValid(userId, request.teamId)) {
+        throw new Error('team associated to game in request does not exist')
+    }
     const gameId: string = `game_${uuid.v4()}`;
 
     const gameItem: GameItem = {

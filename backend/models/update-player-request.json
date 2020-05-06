@@ -22,9 +22,7 @@
     "required": [
         "firstName",
         "lastName",
-        "yearOfBirth",
-        "position",
-        "jerseyNumber"
+        "yearOfBirth"
       ],
     "additionalProperties": false
   }

@@ -6,15 +6,15 @@ export interface PlayerItem {
     firstName: string
     lastName: string
     yearOfBirth: number
-    jerseyNumber: number
-    position: string
+    jerseyNumber?: number
+    position?: string
     playerPicture?: string
 }
 
 export interface PlayerUpdate {
     firstName: string
     lastName: string
-    jerseyNumber: number
+    jerseyNumber?: number
     yearOfBirth: number
-    position: string
+    position?: string
 }

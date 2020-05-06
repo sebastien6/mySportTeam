@@ -1,9 +1,9 @@
-import * as uuid from 'uuid';
-
-import { PlayerItem } from '../models/playerItem';
-import { PlayerAccess } from '../dataLayer/playerAccess';
+import * as uuid from 'uuid'
+import { PlayerItem } from '../models/playerItem'
+import { PlayerAccess } from '../dataLayer/playerAccess'
 // import { getUploadUrl } from '../dataLayer/s3Bucket';
-import { CreatePlayerRequest } from '../requests/PlayerRequest';
+import { CreatePlayerRequest, UpdatePlayerRequest } from '../requests/PlayerRequest'
+import { IsValid } from '../dataLayer/validKeyExist'
 
 const playerAccess = new PlayerAccess();
 
@@ -20,6 +20,9 @@ export async function getPlayer(userId: string, playerId: string): Promise<Playe
 }
 
 export async function createPlayer(userId: string, request: CreatePlayerRequest): Promise<PlayerItem> {
+    if (!IsValid(userId, request.teamId)) {
+        throw new Error('team associated to player in request does not exist')
+    }
     const playerId: string = `player_${uuid.v4()}`;
 
     const playerItem: PlayerItem = {
@@ -41,9 +44,9 @@ export async function deletePlayer(userId: string, playerId: string): Promise<vo
     playerAccess.deletePlayer(userId, playerId);
 }
 
-// export async function updatePlayer(userId: string, todoId: string, request: UpdatePlayerRequest): Promise<void> {
-//     playerAccess.updatePlayer(userId, todoId, request)
-// }
+export async function updatePlayer(userId: string, playerId: string, request: UpdatePlayerRequest): Promise<void> {
+    playerAccess.updatePlayer(userId, playerId, request)
+}
 
 // export async function uploadUrl(userId: string, teamId: string): Promise<string> {
 //     const bucketName = process.env.IMAGES_S3_BUCKET;

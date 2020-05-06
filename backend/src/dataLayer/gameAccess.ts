@@ -1,7 +1,7 @@
 import { DocumentClient } from 'aws-sdk/clients/dynamodb';
 
 import { createDynamoDBClient } from './client'
-import { GameItem } from '../models/gameItem';
+import { GameItem, GameUpdate } from '../models/gameItem';
 import { createLogger } from '../utils/logger';
 
 const logger = createLogger('dynamodb');
@@ -98,47 +98,27 @@ export class GameAccess {
         logger.info('game deleted successfully', {team: result.Attributes})
     }
 
-    // public async updatePlayer(userId: string, teamId: string, playerUpdate: PlayerUpdate): Promise<void> {
-    //     const params: DocumentClient.UpdateItemInput = {
-    //         TableName: this.teamsTable,
-    //         Key:{
-    //             PK: userId,
-    //             SK: teamId
-    //         },
-    //         UpdateExpression:
-    //                 'set  firstName = :fname, lastName = :lname, jerseyNumber = :jersey, YearOfBirth = :ybirth, position= :position',
-    //             ExpressionAttributeValues: {
-    //                 ':fname': playerUpdate.firstName,
-    //                 ':lname': playerUpdate.lastName,
-    //                 ':ybirth': playerUpdate.yearOfBirth,
-    //                 ':jersey': playerUpdate.jerseyNumber,
-    //                 ':position': playerUpdate.position,
-    //             },
-    //             ReturnValues: 'UPDATED_NEW',
-    //     }
-    //     logger.info('Processing db update item with params', {params: params})
+    public async updateGame(userId: string, gameId: string, gameUpdate: GameUpdate): Promise<void> {
+        const params: DocumentClient.UpdateItemInput = {
+            TableName: this.teamsTable,
+            Key:{
+                PK: userId,
+                SK: gameId
+            },
+            UpdateExpression:
+                    'set  opponentTeam = :opponent, teamScore = :tscore, opponentScore = :oscore, location = :location, date= :date',
+                ExpressionAttributeValues: {
+                    ':opponent': gameUpdate.opponentTeam,
+                    ':tscore': gameUpdate.teamScore,
+                    ':oscore': gameUpdate.opponentScore,
+                    ':location': gameUpdate.location,
+                    ':date': gameUpdate.date,
+                },
+                ReturnValues: 'UPDATED_NEW',
+        }
+        logger.info('Processing db update item with params', {params: params})
         
-    //     const item = await this.docClient.update(params).promise()
-    //     logger.info('team updated successfully', {item: item.Attributes});
-    // }
-
-    // public async updatePlayerAttachment(userId: string, teamId: string, attachmentUrl: string): Promise<void> {
-    //     const params = {
-    //         TableName: this.teamsTable,
-    //         Key: {
-    //             userId: userId,
-    //             todoId: teamId
-    //         },
-    //         UpdateExpression:
-    //             'set teamPicture = :teamPicture',
-    //         ExpressionAttributeValues: {
-    //             ':teamPicture': attachmentUrl
-    //         },
-    //         ReturnValues: 'UPDATED_NEW',
-    //     }
-    //     logger.info('Processing db update to add attachment to item', {params: params})
-        
-    //     const res = await this.docClient.update(params).promise();
-    //     logger.info('team updated attachment successful', {item: res.Attributes});
-    // }
+        const item = await this.docClient.update(params).promise()
+        logger.info('game updated successfully', {item: item.Attributes});
+    }
 }

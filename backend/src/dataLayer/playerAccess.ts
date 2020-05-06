@@ -1,10 +1,10 @@
-import { DocumentClient } from 'aws-sdk/clients/dynamodb';
+import { DocumentClient } from 'aws-sdk/clients/dynamodb'
 
 import { createDynamoDBClient } from './client'
-import {PlayerItem } from '../models/playerItem';
-import { createLogger } from '../utils/logger';
+import {PlayerItem, PlayerUpdate } from '../models/playerItem'
+import { createLogger } from '../utils/logger'
 
-const logger = createLogger('dynamodb');
+const logger = createLogger('dynamodb')
 
 export class PlayerAccess {
     constructor(
@@ -98,29 +98,29 @@ export class PlayerAccess {
         logger.info('team deleted successfully', {team: result.Attributes})
     }
 
-    // public async updatePlayer(userId: string, teamId: string, playerUpdate: PlayerUpdate): Promise<void> {
-    //     const params: DocumentClient.UpdateItemInput = {
-    //         TableName: this.teamsTable,
-    //         Key:{
-    //             PK: userId,
-    //             SK: teamId
-    //         },
-    //         UpdateExpression:
-    //                 'set  firstName = :fname, lastName = :lname, jerseyNumber = :jersey, YearOfBirth = :ybirth, position= :position',
-    //             ExpressionAttributeValues: {
-    //                 ':fname': playerUpdate.firstName,
-    //                 ':lname': playerUpdate.lastName,
-    //                 ':ybirth': playerUpdate.yearOfBirth,
-    //                 ':jersey': playerUpdate.jerseyNumber,
-    //                 ':position': playerUpdate.position,
-    //             },
-    //             ReturnValues: 'UPDATED_NEW',
-    //     }
-    //     logger.info('Processing db update item with params', {params: params})
+    public async updatePlayer(userId: string, playerId: string, playerUpdate: PlayerUpdate): Promise<void> {
+        const params: DocumentClient.UpdateItemInput = {
+            TableName: this.teamsTable,
+            Key:{
+                PK: userId,
+                SK: playerId
+            },
+            UpdateExpression:
+                    'set  firstName = :fname, lastName = :lname, jerseyNumber = :jersey, YearOfBirth = :ybirth, position= :position',
+                ExpressionAttributeValues: {
+                    ':fname': playerUpdate.firstName,
+                    ':lname': playerUpdate.lastName,
+                    ':ybirth': playerUpdate.yearOfBirth,
+                    ':jersey': playerUpdate.jerseyNumber,
+                    ':position': playerUpdate.position,
+                },
+                ReturnValues: 'UPDATED_NEW',
+        }
+        logger.info('Processing db update item with params', {params: params})
         
-    //     const item = await this.docClient.update(params).promise()
-    //     logger.info('team updated successfully', {item: item.Attributes});
-    // }
+        const item = await this.docClient.update(params).promise()
+        logger.info('team updated successfully', {item: item.Attributes});
+    }
 
     // public async updatePlayerAttachment(userId: string, teamId: string, attachmentUrl: string): Promise<void> {
     //     const params = {
