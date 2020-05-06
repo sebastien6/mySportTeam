@@ -11,7 +11,6 @@ plugins:
   - serverless-offline-sns
   - serverless-s3-local
   - serverless-offline
-  
 
 custom:
   topicName: teamImagesTopic-${self:provider.stage}
@@ -37,7 +36,7 @@ custom:
       migrate: true
       seed: true
     seed:
-      test:
+      domain:
         sources:
           - table: ${self:provider.environment.TEAMS_TABLE}
             sources: [./seed.json]
@@ -276,7 +275,7 @@ functions:
     events:
       - http:
           method: delete
-          path: players/{teamId}
+          path: players/{playerId}
           # authorizer: Auth
           cors: true
     iamRoleStatements:
@@ -377,7 +376,7 @@ functions:
     events:
       - http:
           method: delete
-          path: games/{teamId}
+          path: games/{gameId}
           # authorizer: Auth
           cors: true
     iamRoleStatements:

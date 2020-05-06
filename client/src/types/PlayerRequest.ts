@@ -1,17 +1,17 @@
-export interface PlayerItem {
-    PK: string
-    SK: string
-    createdAt: string
-    GSI1: string
+/**
+ * Fields in a request to create a single Player item.
+ */
+export interface CreatePlayerRequest {
+    teamId: string
     firstName: string
     lastName: string
     yearOfBirth: number
     jerseyNumber?: number
     position?: string
-    playerPicture?: string
-}
+  }
 
-export interface PlayerUpdate {
+export interface UpdatePlayerRequest {
+    teamId: string
     firstName: string
     lastName: string
     yearOfBirth: number

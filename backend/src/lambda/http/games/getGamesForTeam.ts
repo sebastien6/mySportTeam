@@ -16,7 +16,7 @@ export const getGamesForTeamHandler: APIGatewayProxyHandler = async (event: APIG
   })
   const teamId = event.pathParameters.teamId;
   //const userId = getUserId(event)
-  const id = 'google-oauth2|114715338908998513605'
+  const id = 'google-oauth2|123456789'
   const userId = `user_${id}`
 
   const items = await getAllGamesforTeam(userId, teamId)

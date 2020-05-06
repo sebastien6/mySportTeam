@@ -23,6 +23,7 @@ export async function createGame(userId: string, request: CreateGameRequest): Pr
     if (!IsValid(userId, request.teamId)) {
         throw new Error('team associated to game in request does not exist')
     }
+    
     const gameId: string = `game_${uuid.v4()}`;
 
     const gameItem: GameItem = {

@@ -17,7 +17,7 @@ const deleteGameHandler: APIGatewayProxyHandler = async (event: APIGatewayProxyE
 
   const gameId = event.pathParameters.gameId;
   //const userId = getUserId(event)
-  const id = 'google-oauth2|114715338908998513605'
+  const id = 'google-oauth2|123456789'
   const userId = `user_${id}`
 
   await deleteGame(userId, gameId);
