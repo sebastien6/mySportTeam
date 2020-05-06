@@ -3,8 +3,8 @@ import { APIGatewayProxyEvent, APIGatewayProxyResult, APIGatewayProxyHandler } f
 import * as middy from 'middy';
 import { cors, httpErrorHandler } from 'middy/middlewares';
 
-import { createLogger } from '../../../utils/logger';
-import { uploadUrl } from '../../../businessLogic/teams'
+import { createLogger } from '../../utils/logger';
+import { uploadUrl } from '../../businessLogic/teams'
 // import { getUserId } from '../utils'
 
 const logger = createLogger('api');

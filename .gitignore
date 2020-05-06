@@ -106,3 +106,4 @@ lib
 
 # Webpack directories
 .webpack
+make.js

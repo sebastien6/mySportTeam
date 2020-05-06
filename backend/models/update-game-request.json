@@ -3,31 +3,28 @@
     "title": "team",
     "type": "object",
     "properties": {
-      "teamId": {
+      "opponentTeam": {
         "type": "string"
       },
-      "firstName": {
-        "type": "string"
-      },
-      "lastName": {
-        "type": "string"
-      },
-      "yearOfBirth": {
+      "teamScore": {
         "type": "number"
       },
-      "jerseyNumber": {
+      "opponentScore": {
         "type": "number"
       },
-      "position": {
+      "location": {
+        "type": "string"
+      },
+      "date": {
         "type": "string"
       }
     },
     "required": [
-      "teamId",
-      "firstName",
-      "lastName",
-      "yearOfBirth"
-    ],
+        "opponentTeam",
+        "location",
+        "date",
+        "teamScore",
+        "opponentScore"
+      ],
     "additionalProperties": false
   }
-  

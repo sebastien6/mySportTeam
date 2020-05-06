@@ -37,7 +37,7 @@ custom:
       migrate: true
       seed: true
     seed:
-      domain:
+      test:
         sources:
           - table: ${self:provider.environment.TEAMS_TABLE}
             sources: [./seed.json]
@@ -327,7 +327,7 @@ functions:
         Resource: arn:aws:dynamodb:${self:provider.region}:*:table/${self:provider.environment.TEAMS_TABLE}
       
   GetGamesForTeam:
-    handler: src/lambda/http/games/GetGamesForTeam.handler
+    handler: src/lambda/http/games/getGamesForTeam.handler
     events:
       - http:
           method: get
@@ -391,7 +391,7 @@ functions:
       
 
   GenerateUploadUrl:
-    handler: src/lambda/http/team/generateUploadUrl.handler
+    handler: src/lambda/http/generateUploadUrl.handler
     events:
       - http:
           method: post
