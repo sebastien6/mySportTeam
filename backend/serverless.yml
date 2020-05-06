@@ -219,10 +219,6 @@ functions:
           - dynamodb:GetItem
           - dynamodb:Query
         Resource: arn:aws:dynamodb:${self:provider.region}:*:table/${self:provider.environment.TEAMS_TABLE}
-      # - Effect: Allow
-      #   Action:
-      #     - dynamodb:Query
-      #   Resource: arn:aws:dynamodb:${self:provider.region}:*:table/${self:provider.environment.TEAMS_TABLE}/index/${self:provider.environment.CREATED_AT_INDEX}
 
   GetPlayersInTeam:
     handler: src/lambda/http/players/getPlayersInTeam.handler
@@ -268,6 +264,29 @@ functions:
       - Effect: Allow
         Action:
           - dynamodb:PutItem
+        Resource: arn:aws:dynamodb:${self:provider.region}:*:table/${self:provider.environment.TEAMS_TABLE}
+
+  UpdatePlayer:
+    handler: src/lambda/http/players/updatePlayer.handler
+    events:
+      - http:
+          method: patch
+          path: players/{playerId}
+          # authorizer: Auth
+          cors: true
+          request:
+            schema:
+              application/json: ${file(models/update-player-request.json)}
+          documentation:
+            summary: Update a player item
+            description: Update a player item
+    deploymentSettings:
+      type: Canary10Percent5Minutes
+      alias: Live
+    iamRoleStatements:
+      - Effect: Allow
+        Action:
+          - dynamodb:UpdateItem
         Resource: arn:aws:dynamodb:${self:provider.region}:*:table/${self:provider.environment.TEAMS_TABLE}
 
   DeletePlayer:
@@ -369,6 +388,29 @@ functions:
       - Effect: Allow
         Action:
           - dynamodb:PutItem
+        Resource: arn:aws:dynamodb:${self:provider.region}:*:table/${self:provider.environment.TEAMS_TABLE}
+
+  UpdateGame:
+    handler: src/lambda/http/games/updateGame.handler
+    events:
+      - http:
+          method: patch
+          path: games/{gameId}
+          # authorizer: Auth
+          cors: true
+          request:
+            schema:
+              application/json: ${file(models/update-game-request.json)}
+          documentation:
+            summary: Update a game item
+            description: Update a game item
+    deploymentSettings:
+      type: Canary10Percent5Minutes
+      alias: Live
+    iamRoleStatements:
+      - Effect: Allow
+        Action:
+          - dynamodb:UpdateItem
         Resource: arn:aws:dynamodb:${self:provider.region}:*:table/${self:provider.environment.TEAMS_TABLE}
 
   DeleteGame:

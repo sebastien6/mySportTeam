@@ -3,7 +3,7 @@ import { PlayerItem } from '../models/playerItem'
 import { PlayerAccess } from '../dataLayer/playerAccess'
 // import { getUploadUrl } from '../dataLayer/s3Bucket';
 import { CreatePlayerRequest, UpdatePlayerRequest } from '../requests/PlayerRequest'
-import { IsValid } from '../dataLayer/validKeyExist'
+import { isValid } from '../dataLayer/validKeyExist'
 
 const playerAccess = new PlayerAccess();
 
@@ -20,8 +20,7 @@ export async function getPlayer(userId: string, playerId: string): Promise<Playe
 }
 
 export async function createPlayer(userId: string, request: CreatePlayerRequest): Promise<PlayerItem> {
-    const teamExist = IsValid(userId, request.teamId)
-    console.log(`does team exist? ${teamExist}`)
+    const teamExist = await isValid(userId, request.teamId)
     
     if (!teamExist) {
         throw new Error('team associated to player in request does not exist')

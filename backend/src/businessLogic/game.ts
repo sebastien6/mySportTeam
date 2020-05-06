@@ -3,7 +3,7 @@ import { GameItem } from '../models/gameItem'
 import { GameAccess } from '../dataLayer/gameAccess'
 // import { getUploadUrl } from '../dataLayer/s3Bucket'
 import { CreateGameRequest } from '../requests/GameRequest'
-import { IsValid } from '../dataLayer/validKeyExist'
+import { isValid } from '../dataLayer/validKeyExist'
 
 const gameAccess = new GameAccess();
 
@@ -20,7 +20,9 @@ export async function getGame(userId: string, gameId: string): Promise<GameItem>
 }
 
 export async function createGame(userId: string, request: CreateGameRequest): Promise<GameItem> {
-    if (!IsValid(userId, request.teamId)) {
+    const teamExist = await isValid(userId, request.teamId)
+    
+    if (!teamExist) {
         throw new Error('team associated to game in request does not exist')
     }
     
