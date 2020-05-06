@@ -20,9 +20,13 @@ export async function getPlayer(userId: string, playerId: string): Promise<Playe
 }
 
 export async function createPlayer(userId: string, request: CreatePlayerRequest): Promise<PlayerItem> {
-    if (!IsValid(userId, request.teamId)) {
+    const teamExist = IsValid(userId, request.teamId)
+    console.log(`does team exist? ${teamExist}`)
+    
+    if (!teamExist) {
         throw new Error('team associated to player in request does not exist')
     }
+
     const playerId: string = `player_${uuid.v4()}`;
 
     const playerItem: PlayerItem = {
