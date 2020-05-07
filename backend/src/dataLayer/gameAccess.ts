@@ -106,10 +106,10 @@ export class GameAccess {
                 SK: gameId
             },
             UpdateExpression:
-                    'set  opponentTeam = :opponent, teamScore = :tscore, opponentScore = :oscore, location = :location, date= :date',
+                    'set  opponentTeam = :opponent, teamScore = :teamScore, opponentScore = :oscore, location = :location, date= :date',
                 ExpressionAttributeValues: {
                     ':opponent': gameUpdate.opponentTeam,
-                    ':tscore': gameUpdate.teamScore,
+                    ':teamScore': gameUpdate.teamScore,
                     ':oscore': gameUpdate.opponentScore,
                     ':location': gameUpdate.location,
                     ':date': gameUpdate.date,

@@ -24,7 +24,7 @@ export async function createTeam(userId: string, request: CreateTeamRequest): Pr
         name: request.name,
         sport: request.sport,
         season: request.season,
-        retired: false
+        retired: request.retired
     }
 
     return teamAccess.createTeam(teamItem);

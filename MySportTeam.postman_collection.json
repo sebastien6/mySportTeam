@@ -1,0 +1,584 @@
+{
+	"variables": [],
+	"info": {
+		"name": "MySportTeam",
+		"_postman_id": "5c63d620-51b5-8f74-5aeb-ebf39a74294d",
+		"description": "",
+		"schema": "https://schema.getpostman.com/json/collection/v2.0.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "games",
+			"description": "",
+			"item": [
+				{
+					"name": "Get All Games",
+					"request": {
+						"url": "{{endpoint}}/games",
+						"method": "GET",
+						"header": [],
+						"body": {},
+						"description": ""
+					},
+					"response": []
+				},
+				{
+					"name": "create game",
+					"request": {
+						"url": "{{endpoint}}/games",
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"description": ""
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n\t\"teamId\": \"team_287d9159-69a0-4958-a413-b1b38f99fae7\",\n    \"firstName\": \"Frodo\",\n    \"lastName\": \"Baggins\",\n    \"yearOfBirth\": 2006,\n    \"jerseyNumber\": 13,\n    \"position\": \"defense\"\n}"
+						},
+						"description": ""
+					},
+					"response": []
+				},
+				{
+					"name": "Get a game",
+					"request": {
+						"url": "{{endpoint}}/games/player_fe090bb0-6d2e-4ec1-ad86-95af1861d343",
+						"method": "GET",
+						"header": [],
+						"body": {},
+						"description": ""
+					},
+					"response": []
+				},
+				{
+					"name": "Update a game",
+					"request": {
+						"url": "{{endpoint}}/games/player_fe090bb0-6d2e-4ec1-ad86-95af1861d343",
+						"method": "PATCH",
+						"header": [],
+						"body": {},
+						"description": ""
+					},
+					"response": []
+				},
+				{
+					"name": "Delete a game",
+					"request": {
+						"url": "{{endpoint}}/games/player_fe090bb0-6d2e-4ec1-ad86-95af1861d343",
+						"method": "DELETE",
+						"header": [],
+						"body": {},
+						"description": ""
+					},
+					"response": []
+				},
+				{
+					"name": "Get all games for a team",
+					"request": {
+						"url": "{{endpoint}}/teams/team_287d9159-69a0-4958-a413-b1b38f99fae7/games",
+						"method": "GET",
+						"header": [],
+						"body": {},
+						"description": ""
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "teams",
+			"description": "",
+			"item": [
+				{
+					"name": "Get All Teams",
+					"request": {
+						"url": "{{endpoint}}/teams",
+						"method": "GET",
+						"header": [],
+						"body": {},
+						"description": ""
+					},
+					"response": []
+				},
+				{
+					"name": "Get a team",
+					"request": {
+						"url": "{{endpoint}}/teams/team_d41f893d-6a82-4051-beea-e0036691392a",
+						"method": "GET",
+						"header": [],
+						"body": {},
+						"description": ""
+					},
+					"response": []
+				},
+				{
+					"name": "Create a team",
+					"request": {
+						"url": "{{endpoint}}/teams",
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"description": ""
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n  \"name\": \"The Warriors\",\n  \"sport\": \"football\",\n  \"season\": \"2019\"\n}"
+						},
+						"description": ""
+					},
+					"response": []
+				},
+				{
+					"name": "Delete a team",
+					"request": {
+						"url": "{{endpoint}}/teams/team_022e4f77-96ad-4a84-83cc-fd50966bf5bc",
+						"method": "DELETE",
+						"header": [],
+						"body": {},
+						"description": ""
+					},
+					"response": []
+				},
+				{
+					"name": "Update a team",
+					"request": {
+						"url": "{{endpoint}}/teams/team_0c11415f-95d9-4ba5-be5c-6c384ae86f1c",
+						"method": "PATCH",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"description": ""
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n\t\"season\": \"2019\",\n\t\"name\": \"The Dark Warriors\",\n    \"sport\": \"football\",\n    \"retired\": true\n}"
+						},
+						"description": ""
+					},
+					"response": []
+				},
+				{
+					"name": "Get team attachment URL",
+					"request": {
+						"url": "{{endpoint}}/teams/team_d41f893d-6a82-4051-beea-e0036691392a/attachment",
+						"method": "POST",
+						"header": [],
+						"body": {},
+						"description": ""
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "players",
+			"description": "",
+			"item": [
+				{
+					"name": "Get all players",
+					"request": {
+						"url": "{{endpoint}}/players",
+						"method": "GET",
+						"header": [],
+						"body": {},
+						"description": ""
+					},
+					"response": []
+				},
+				{
+					"name": "Create a player",
+					"request": {
+						"url": "https://tvtq0vwet5.execute-api.us-east-1.amazonaws.com/dev/players",
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"description": ""
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n\t\"teamId\": \"team_0c11415f-95d9-4ba5-be5c-6c384ae86f1c\",\n    \"firstName\": \"Sauron\",\n    \"lastName\": \"Dark\",\n    \"yearOfBirth\": 2005,\n    \"jerseyNumber\": 9,\n    \"position\": \"center\"\n}"
+						},
+						"description": ""
+					},
+					"response": []
+				},
+				{
+					"name": "Get team with all players",
+					"request": {
+						"url": "{{endpoint}}/teams/team_287d9159-69a0-4958-a413-b1b38f99fae7/players",
+						"method": "GET",
+						"header": [],
+						"body": {},
+						"description": ""
+					},
+					"response": []
+				},
+				{
+					"name": "Get a player",
+					"request": {
+						"url": "{{endpoint}}/players/player_fe090bb0-6d2e-4ec1-ad86-95af1861d343",
+						"method": "GET",
+						"header": [],
+						"body": {},
+						"description": ""
+					},
+					"response": []
+				},
+				{
+					"name": "Update a player",
+					"request": {
+						"url": "{{endpoint}}/players/player_fe090bb0-6d2e-4ec1-ad86-95af1861d343",
+						"method": "PATCH",
+						"header": [],
+						"body": {},
+						"description": ""
+					},
+					"response": []
+				},
+				{
+					"name": "Delete a player",
+					"request": {
+						"url": "{{endpoint}}/players/player_fe090bb0-6d2e-4ec1-ad86-95af1861d343",
+						"method": "DELETE",
+						"header": [],
+						"body": {},
+						"description": ""
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "offline",
+			"description": "",
+			"item": [
+				{
+					"name": "teams",
+					"description": "",
+					"item": [
+						{
+							"name": "Get All Teams",
+							"request": {
+								"url": "{{offlineUrl}}/teams",
+								"method": "GET",
+								"header": [],
+								"body": {},
+								"description": ""
+							},
+							"response": []
+						},
+						{
+							"name": "Create team",
+							"request": {
+								"url": "{{offlineUrl}}/teams",
+								"method": "POST",
+								"header": [
+									{
+										"key": "Content-Type",
+										"value": "application/json",
+										"description": ""
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n  \"name\": \"Mirage\",\n  \"sport\": \"Ringette\",\n  \"season\": \"2019\"\n}"
+								},
+								"description": ""
+							},
+							"response": []
+						},
+						{
+							"name": "delete team",
+							"request": {
+								"url": "{{offlineUrl}}/teams/team_287d9159-69a0-4958-a413-b1b38f99gt8u",
+								"method": "DELETE",
+								"header": [],
+								"body": {},
+								"description": ""
+							},
+							"response": []
+						},
+						{
+							"name": "update team",
+							"request": {
+								"url": "{{offlineUrl}}/teams/team_287d9159-69a0-4958-a413-b1b38f99fae7",
+								"method": "PATCH",
+								"header": [
+									{
+										"key": "Content-Type",
+										"value": "application/json",
+										"description": ""
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n\t\"season\": \"2020\",\n    \"name\": \"the fellowship\",\n    \"retired\": false,\n    \"sport\": \"hockey\"\n}"
+								},
+								"description": ""
+							},
+							"response": []
+						},
+						{
+							"name": "Get a team",
+							"request": {
+								"url": "{{offlineUrl}}/teams/team_0c11415f-95d9-4ba5-be5c-6c384ae86f1c",
+								"method": "GET",
+								"header": [],
+								"body": {},
+								"description": ""
+							},
+							"response": []
+						},
+						{
+							"name": "Get Team attachment URL",
+							"request": {
+								"url": "{{offlineUrl}}/attachment/team_0c11415f-95d9-4ba5-be5c-6c384ae86f1c",
+								"method": "POST",
+								"header": [],
+								"body": {},
+								"description": ""
+							},
+							"response": []
+						}
+					],
+					"_postman_isSubFolder": true
+				},
+				{
+					"name": "players",
+					"description": "",
+					"item": [
+						{
+							"name": "Get All Players",
+							"request": {
+								"url": "{{offlineUrl}}/players",
+								"method": "GET",
+								"header": [],
+								"body": {},
+								"description": ""
+							},
+							"response": []
+						},
+						{
+							"name": "create player",
+							"request": {
+								"url": "{{offlineUrl}}/players",
+								"method": "POST",
+								"header": [
+									{
+										"key": "Content-Type",
+										"value": "application/json",
+										"description": ""
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n\t\"teamId\": \"team_287d9159-69a0-4958-a413-b1b38f99fae7\",\n    \"firstName\": \"Pippin\",\n    \"lastName\": \"Took\",\n    \"yearOfBirth\": 2006\n}"
+								},
+								"description": ""
+							},
+							"response": []
+						},
+						{
+							"name": "create player failure (bad teamId)",
+							"request": {
+								"url": "{{offlineUrl}}/players",
+								"method": "POST",
+								"header": [
+									{
+										"key": "Content-Type",
+										"value": "application/json",
+										"description": ""
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n\t\"teamId\": \"team_12345\",\n    \"firstName\": \"Pippin\",\n    \"lastName\": \"Took\",\n    \"yearOfBirth\": 2006,\n    \"position\": \"center\",\n    \"jerseyNumber\": 7\n}"
+								},
+								"description": ""
+							},
+							"response": []
+						},
+						{
+							"name": "Get a player",
+							"request": {
+								"url": "{{offlineUrl}}/players/player_00e29602-bfe7-47ce-a596-3a912f032ad7",
+								"method": "GET",
+								"header": [],
+								"body": {},
+								"description": ""
+							},
+							"response": []
+						},
+						{
+							"name": "Update a player",
+							"request": {
+								"url": "{{offlineUrl}}/players/player_00e29602-bfe7-47ce-a596-3a912f032ad7",
+								"method": "PATCH",
+								"header": [
+									{
+										"key": "Content-Type",
+										"value": "application/json",
+										"description": ""
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n    \"firstName\": \"Bilbo\",\n    \"lastName\": \"Baggins\",\n    \"teamId\": \"player_00e29602-bfe7-47ce-a596-3a912f032ad7\",\n    \"jerseyNumber\": 11,\n    \"position\": \"center\",\n    \"yearOfBirth\": 2006\n}"
+								},
+								"description": ""
+							},
+							"response": []
+						},
+						{
+							"name": "Delete a player",
+							"request": {
+								"url": "{{offlineUrl}}/players/player_fe090bb0-95d9-4ba5-ad86-95a1635d343",
+								"method": "DELETE",
+								"header": [],
+								"body": {},
+								"description": ""
+							},
+							"response": []
+						},
+						{
+							"name": "Get team with all players",
+							"request": {
+								"url": "{{offlineUrl}}/teams/team_287d9159-69a0-4958-a413-b1b38f99fae7/players",
+								"method": "GET",
+								"header": [],
+								"body": {},
+								"description": ""
+							},
+							"response": []
+						},
+						{
+							"name": "Get Player attachment url",
+							"request": {
+								"url": "{{offlineUrl}}/attachment/player_00e29602-bfe7-47ce-a596-3a912f032ad7",
+								"method": "POST",
+								"header": [],
+								"body": {},
+								"description": ""
+							},
+							"response": []
+						}
+					],
+					"_postman_isSubFolder": true
+				},
+				{
+					"name": "games",
+					"description": "",
+					"item": [
+						{
+							"name": "Get All Games",
+							"request": {
+								"url": "{{offlineUrl}}/games",
+								"method": "GET",
+								"header": [],
+								"body": {},
+								"description": ""
+							},
+							"response": []
+						},
+						{
+							"name": "create game",
+							"request": {
+								"url": "{{offlineUrl}}/games",
+								"method": "POST",
+								"header": [
+									{
+										"key": "Content-Type",
+										"value": "application/json",
+										"description": ""
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n\t\"teamId\": \"team_0c11415f-95d9-4ba5-be5c-6c384ae86f1c\",\n    \"opponentTeam\": \"The Blusters\",\n    \"date\": \"January 15, 1995\",\n    \"location\": \"Chicago\",\n    \"teamScore\": 9,\n    \"opponentScore\": 1\n}"
+								},
+								"description": ""
+							},
+							"response": []
+						},
+						{
+							"name": "Get a game",
+							"request": {
+								"url": "{{offlineUrl}}/games/game_b8a2bc43-39aa-45dc-b159-018881d19fdd",
+								"method": "GET",
+								"header": [],
+								"body": {},
+								"description": ""
+							},
+							"response": []
+						},
+						{
+							"name": "Update a game",
+							"request": {
+								"url": "{{offlineUrl}}/games/game_90da351d-da3b-4360-abb3-69e5082d4506",
+								"method": "PATCH",
+								"header": [
+									{
+										"key": "Content-Type",
+										"value": "application/json",
+										"description": ""
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n\t\"teamId\": \"team_0c11415f-95d9-4ba5-be5c-6c384ae86f1c\",\n\t\"date\": \"May 12, 2020\",\n    \"createdAt\": \"2020-05-06T23:37:39.136Z\",\n    \"opponentTeam\": \"the elves\",\n    \"location\": \"Toronto\",\n    \"teamScore\": 1,\n\t\"opponentScore\": 1,\n}"
+								},
+								"description": ""
+							},
+							"response": []
+						},
+						{
+							"name": "Delete a game",
+							"request": {
+								"url": "{{offlineUrl}}/games/game_23ac25d9-6eec-4cce-a9b9-897d8eceb51f",
+								"method": "DELETE",
+								"header": [],
+								"body": {},
+								"description": ""
+							},
+							"response": []
+						},
+						{
+							"name": "Get all games for a team",
+							"request": {
+								"url": "{{offlineUrl}}/teams/team_287d9159-69a0-4958-a413-b1b38f99fae7/games",
+								"method": "GET",
+								"header": [],
+								"body": {},
+								"description": ""
+							},
+							"response": []
+						},
+						{
+							"name": "Get Game attachment url",
+							"request": {
+								"url": "{{offlineUrl}}/attachment/game_90da351d-da3b-4360-abb3-69e5082d4506",
+								"method": "POST",
+								"header": [],
+								"body": {},
+								"description": ""
+							},
+							"response": []
+						}
+					],
+					"_postman_isSubFolder": true
+				}
+			]
+		}
+	]
+}

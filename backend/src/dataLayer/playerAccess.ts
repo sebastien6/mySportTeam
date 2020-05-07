@@ -106,15 +106,18 @@ export class PlayerAccess {
                 SK: playerId
             },
             UpdateExpression:
-                    'set  firstName = :fname, lastName = :lname, jerseyNumber = :jersey, YearOfBirth = :ybirth, position= :position',
-                ExpressionAttributeValues: {
-                    ':fname': playerUpdate.firstName,
-                    ':lname': playerUpdate.lastName,
-                    ':ybirth': playerUpdate.yearOfBirth,
-                    ':jersey': playerUpdate.jerseyNumber,
-                    ':position': playerUpdate.position,
-                },
-                ReturnValues: 'UPDATED_NEW',
+                'set  firstName = :firstName, lastName = :lastName, jerseyNumber = :jersey, YearOfBirth = :ybirth, #P= :position',
+            ExpressionAttributeValues: {
+                ':firstName': playerUpdate.firstName,
+                ':lastName': playerUpdate.lastName,
+                ':ybirth': playerUpdate.yearOfBirth,
+                ':jersey': playerUpdate.jerseyNumber,
+                ':position': playerUpdate.position,
+            },
+            ExpressionAttributeNames: {
+                '#P': 'position', // fix for ValidationException: Invalid UpdateExpression: Attribute name is a reserved keyword
+            },
+            ReturnValues: 'UPDATED_NEW',
         }
         logger.info('Processing db update item with params', {params: params})
         

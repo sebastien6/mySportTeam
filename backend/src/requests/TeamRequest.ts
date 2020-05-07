@@ -5,6 +5,7 @@ export interface CreateTeamRequest {
     name: string
     sport: string
     season: string
+    retired?: boolean
   }
 
 export interface UpdateTeamRequest {

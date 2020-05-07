@@ -24,19 +24,19 @@ export async function uploadUrl(userId: string, Id: string): Promise<string> {
 
     if (Id.startsWith('team')){
         if (process.env.IS_OFFLINE) {
-            teamAccess.updateTeamAttachment(userId, Id, `https://localhost:8001/${imageId}`);
+            teamAccess.updateTeamAttachment(userId, Id, `http://localhost:8001/${bucketName}/${imageId}`);
         } else {
             teamAccess.updateTeamAttachment(userId, Id, `https://${bucketName}.s3.amazonaws.com/${imageId}`);
         }
     } else if (Id.startsWith('player')) {
         if (process.env.IS_OFFLINE) {
-            playerAccess.updatePlayerAttachment(userId, Id, `https://localhost:8001/${imageId}`);
+            playerAccess.updatePlayerAttachment(userId, Id, `http://localhost:8001/${bucketName}/${imageId}`);
         } else {
-            playerAccess.updatePlayerAttachment(userId, Id, `https://${bucketName}.s3.amazonaws.com/${imageId}`);
+            playerAccess.updatePlayerAttachment(userId, Id, `http://${bucketName}.s3.amazonaws.com/${imageId}`);
         } 
     } else if (Id.startsWith('game')) {
         if (process.env.IS_OFFLINE) {
-            gameAccess.updateGameAttachment(userId, Id, `https://localhost:8001/${imageId}`);
+            gameAccess.updateGameAttachment(userId, Id, `http://localhost:8001/${bucketName}/${imageId}`);
         } else {
             gameAccess.updateGameAttachment(userId, Id, `https://${bucketName}.s3.amazonaws.com/${imageId}`);
         }

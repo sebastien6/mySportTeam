@@ -5,6 +5,7 @@ plugins:
   - serverless-webpack
   - serverless-aws-documentation
   - serverless-iam-roles-per-function
+  - serverless-plugin-split-stacks
   - serverless-plugin-canary-deployments
   - serverless-plugin-tracing
   - serverless-dynamodb-local
@@ -17,6 +18,10 @@ custom:
   webpack:
     webpackConfig: ./webpack.config.js
     includeModules: true
+  splitStacks:
+    perFunction: false
+    perType: true
+    perGroupFunction: false
   documentation:
     api:
       info:
@@ -61,7 +66,7 @@ provider:
     GSI1_INDEX: Gsi1Index
     IMAGES_S3_BUCKET: seb6-mysportteam-images-${self:provider.stage}
     SIGNED_URL_EXPIRATION: 300
-    # DOMAIN: dev-bquc1kgl.auth0.com
+    DOMAIN: dev-bquc1kgl.auth0.com
   tracing: true # enable tracing
   iamRoleStatements:
     - Effect: "Allow" # xray permissions (required)
@@ -74,8 +79,8 @@ provider:
   region: ${opt:region, 'us-east-1'}
 
 functions:
-  # Auth:
-  #   handler: src/lambda/auth/auth0Authorizer.handler
+  Auth:
+    handler: src/lambda/auth/auth0Authorizer.handler
 
   GetTeams:
     handler: src/lambda/http/teams/getTeams.handler
@@ -84,7 +89,7 @@ functions:
           method: get
           path: teams
           cors: true
-          # authorizer: Auth
+          authorizer: Auth
     deploymentSettings:
       type: Canary10Percent5Minutes
       alias: Live
@@ -107,7 +112,7 @@ functions:
           method: get
           path: teams/{teamId}
           cors: true
-          # authorizer: Auth
+          authorizer: Auth
     deploymentSettings:
       type: Canary10Percent5Minutes
       alias: Live
@@ -125,7 +130,7 @@ functions:
       - http:
           method: post
           path: teams
-          # authorizer: Auth
+          authorizer: Auth
           cors: true
           request:
             schema:
@@ -148,7 +153,7 @@ functions:
       - http:
           method: patch
           path: teams/{teamId}
-          # authorizer: Auth
+          authorizer: Auth
           cors: true
           request:
             schema:
@@ -171,7 +176,7 @@ functions:
       - http:
           method: delete
           path: teams/{teamId}
-          # authorizer: Auth
+          authorizer: Auth
           cors: true
     iamRoleStatements:
       - Effect: Allow
@@ -189,7 +194,7 @@ functions:
           method: get
           path: players/{playerId}
           cors: true
-          # authorizer: Auth
+          authorizer: Auth
     deploymentSettings:
       type: Canary10Percent5Minutes
       alias: Live
@@ -208,7 +213,7 @@ functions:
           method: get
           path: players
           cors: true
-          # authorizer: Auth
+          authorizer: Auth
     deploymentSettings:
       type: Canary10Percent5Minutes
       alias: Live
@@ -227,7 +232,7 @@ functions:
           method: get
           path: teams/{teamId}/players
           cors: true
-          # authorizer: Auth
+          authorizer: Auth
     deploymentSettings:
       type: Canary10Percent5Minutes
       alias: Live
@@ -249,7 +254,7 @@ functions:
       - http:
           method: post
           path: players
-          # authorizer: Auth
+          authorizer: Auth
           cors: true
           request:
             schema:
@@ -272,7 +277,7 @@ functions:
       - http:
           method: patch
           path: players/{playerId}
-          # authorizer: Auth
+          authorizer: Auth
           cors: true
           request:
             schema:
@@ -295,7 +300,7 @@ functions:
       - http:
           method: delete
           path: players/{playerId}
-          # authorizer: Auth
+          authorizer: Auth
           cors: true
     iamRoleStatements:
       - Effect: Allow
@@ -313,7 +318,7 @@ functions:
           method: get
           path: games/{gameId}
           cors: true
-          # authorizer: Auth
+          authorizer: Auth
     deploymentSettings:
       type: Canary10Percent5Minutes
       alias: Live
@@ -332,7 +337,7 @@ functions:
           method: get
           path: games
           cors: true
-          # authorizer: Auth
+          authorizer: Auth
     deploymentSettings:
       type: Canary10Percent5Minutes
       alias: Live
@@ -351,7 +356,7 @@ functions:
           method: get
           path: teams/{teamId}/games
           cors: true
-          # authorizer: Auth
+          authorizer: Auth
     deploymentSettings:
       type: Canary10Percent5Minutes
       alias: Live
@@ -373,7 +378,7 @@ functions:
       - http:
           method: post
           path: games
-          # authorizer: Auth
+          authorizer: Auth
           cors: true
           request:
             schema:
@@ -396,7 +401,7 @@ functions:
       - http:
           method: patch
           path: games/{gameId}
-          # authorizer: Auth
+          authorizer: Auth
           cors: true
           request:
             schema:
@@ -419,7 +424,7 @@ functions:
       - http:
           method: delete
           path: games/{gameId}
-          # authorizer: Auth
+          authorizer: Auth
           cors: true
     iamRoleStatements:
       - Effect: Allow
@@ -436,8 +441,9 @@ functions:
     events:
       - http:
           method: post
-          path: teams/{id}/attachment
+          path: attachment/{id}
           cors: true
+          authorizer: Auth
     deploymentSettings:
       type: Canary10Percent5Minutes
       alias: Live

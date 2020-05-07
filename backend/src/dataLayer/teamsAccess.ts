@@ -83,17 +83,17 @@ export class TeamAccess {
                 SK: teamId
             },
             UpdateExpression:
-                    'set  #N = :name, season = :season, sport = :sport, retired = :retired',
-                ExpressionAttributeValues: {
-                    ':name': teamUpdate.name,
-                    ':season': teamUpdate.season,
-                    ':sport': teamUpdate.sport,
-                    ':retired': teamUpdate.retired
-                },
-                ExpressionAttributeNames: {
-                    '#N': 'name', // fix for ValidationException: Invalid UpdateExpression: Attribute name is a reserved keyword
-                },
-                ReturnValues: 'UPDATED_NEW',
+                'set  #N = :name, season = :season, sport = :sport, retired = :retired',
+            ExpressionAttributeValues: {
+                ':name': teamUpdate.name,
+                ':season': teamUpdate.season,
+                ':sport': teamUpdate.sport,
+                ':retired': teamUpdate.retired
+            },
+            ExpressionAttributeNames: {
+                '#N': 'name', // fix for ValidationException: Invalid UpdateExpression: Attribute name is a reserved keyword
+            },
+            ReturnValues: 'UPDATED_NEW',
         }
         logger.info('Processing db update item with params', {params: params})
         
