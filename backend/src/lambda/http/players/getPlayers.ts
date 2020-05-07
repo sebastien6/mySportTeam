@@ -15,12 +15,7 @@ export const getPlayersHandler: APIGatewayProxyHandler = async (event: APIGatewa
     event: event
   })
 
-  let userId
-  if (process.env.IS_OFFLINE) {
-    userId = `user_123456789`
-  } else {
-    userId = getUserId(event)
-  }
+  const userId = getUserId(event)
 
   const items = await getAllPlayers(userId)
   return {

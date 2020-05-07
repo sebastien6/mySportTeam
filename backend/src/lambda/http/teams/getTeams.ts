@@ -14,12 +14,7 @@ export const getTodoHandler: APIGatewayProxyHandler = async (event: APIGatewayPr
     func: 'getTodohandler',
     event: event
   })
-  let userId
-  if (process.env.IS_OFFLINE) {
-    userId = `user_123456789`
-  } else {
-    userId = getUserId(event)
-  }
+  const userId = getUserId(event)
 
   const items = await getAllTeams(userId)
   return {

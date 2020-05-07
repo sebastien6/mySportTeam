@@ -16,12 +16,7 @@ const deleteGameHandler: APIGatewayProxyHandler = async (event: APIGatewayProxyE
   })
 
   const gameId = event.pathParameters.gameId;
-  let userId
-  if (process.env.IS_OFFLINE) {
-    userId = `user_123456789`
-  } else {
-    userId = getUserId(event)
-  }
+  const userId = getUserId(event)
 
   await deleteGame(userId, gameId);
 

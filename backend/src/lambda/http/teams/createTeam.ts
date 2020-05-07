@@ -17,12 +17,7 @@ const createTeamHandler: APIGatewayProxyHandler = async (event: APIGatewayProxyE
   })
 
   const newTeam: CreateTeamRequest = JSON.parse(event.body);
-  let userId
-  if (process.env.IS_OFFLINE) {
-    userId = `user_123456789`
-  } else {
-    userId = getUserId(event)
-  }
+  const userId = getUserId(event)
 
   const item = await createTeam(userId, newTeam);
 

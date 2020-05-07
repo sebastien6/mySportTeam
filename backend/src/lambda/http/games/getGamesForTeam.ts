@@ -15,12 +15,7 @@ export const getGamesForTeamHandler: APIGatewayProxyHandler = async (event: APIG
     event: event
   })
   const teamId = event.pathParameters.teamId;
-  let userId
-  if (process.env.IS_OFFLINE) {
-    userId = `user_123456789`
-  } else {
-    userId = getUserId(event)
-  }
+  const userId = getUserId(event)
   
   const items = await getAllGamesforTeam(userId, teamId)
   return {

@@ -16,12 +16,7 @@ export const uploadUrlHandler: APIGatewayProxyHandler = async (event: APIGateway
       })
   const id = event.pathParameters.id;
 
-  let userId
-  if (process.env.IS_OFFLINE) {
-    userId = `user_123456789`
-  } else {
-    userId = getUserId(event)
-  }
+  const userId = getUserId(event)
   
   const url = await uploadUrl(userId, id);
 
