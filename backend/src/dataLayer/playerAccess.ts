@@ -122,23 +122,23 @@ export class PlayerAccess {
         logger.info('team updated successfully', {item: item.Attributes});
     }
 
-    // public async updatePlayerAttachment(userId: string, teamId: string, attachmentUrl: string): Promise<void> {
-    //     const params = {
-    //         TableName: this.teamsTable,
-    //         Key: {
-    //             userId: userId,
-    //             todoId: teamId
-    //         },
-    //         UpdateExpression:
-    //             'set teamPicture = :teamPicture',
-    //         ExpressionAttributeValues: {
-    //             ':teamPicture': attachmentUrl
-    //         },
-    //         ReturnValues: 'UPDATED_NEW',
-    //     }
-    //     logger.info('Processing db update to add attachment to item', {params: params})
+    public async updatePlayerAttachment(userId: string, playerId: string, attachmentUrl: string): Promise<void> {
+        const params = {
+            TableName: this.teamsTable,
+            Key: {
+                PK: userId,
+                SK: playerId
+            },
+            UpdateExpression:
+                'set playerPicture = :playerPicture',
+            ExpressionAttributeValues: {
+                ':playerPicture': attachmentUrl
+            },
+            ReturnValues: 'UPDATED_NEW',
+        }
+        logger.info('Processing db update to add attachment to player item', {params: params})
         
-    //     const res = await this.docClient.update(params).promise();
-    //     logger.info('team updated attachment successful', {item: res.Attributes});
-    // }
+        const res = await this.docClient.update(params).promise();
+        logger.info('player updated attachment successful', {item: res.Attributes});
+    }
 }

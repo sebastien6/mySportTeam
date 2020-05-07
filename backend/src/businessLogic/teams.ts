@@ -2,7 +2,6 @@ import * as uuid from 'uuid';
 
 import { TeamItem } from '../models/teamItem';
 import { TeamAccess } from '../dataLayer/teamsAccess';
-import { getUploadUrl } from '../dataLayer/s3Bucket';
 import { CreateTeamRequest, UpdateTeamRequest } from '../requests/TeamRequest';
 
 const teamAccess = new TeamAccess();
@@ -37,20 +36,4 @@ export async function deleteTeam(userId: string, todoId: string): Promise<void> 
 
 export async function updateTeam(userId: string, todoId: string, request: UpdateTeamRequest): Promise<void> {
     teamAccess.updateTeam(userId, todoId, request)
-}
-
-export async function uploadUrl(userId: string, teamId: string): Promise<string> {
-    const bucketName = process.env.IMAGES_S3_BUCKET;
-
-    const imageId = uuid.v4();
-    const uploadUrl = getUploadUrl(imageId);
-
-    if (process.env.IS_OFFLINE) {
-        teamAccess.updateTodoAttachment(userId, teamId, `https://localhost:8001/${imageId}`);
-    } else {
-        teamAccess.updateTodoAttachment(userId, teamId, `https://${bucketName}.s3.amazonaws.com/${imageId}`);
-    }
-
-    
-    return uploadUrl;
 }

@@ -6,7 +6,7 @@ import { cors, httpErrorHandler } from 'middy/middlewares'
 import { UpdateTeamRequest } from '../../../requests/TeamRequest'
 import { createLogger } from '../../../utils/logger'
 import { updateTeam } from '../../../businessLogic/teams'
-// import { getUserId } from '../utils'
+import { getUserId } from '../../utils'
 
 const logger = createLogger('api');
 
@@ -18,9 +18,12 @@ export const updateHandler: APIGatewayProxyHandler = async (event: APIGatewayPro
 
     const teamId = event.pathParameters.teamId;
     const updatedTeam: UpdateTeamRequest = JSON.parse(event.body)
-    //const userId = getUserId(event);
-    const id = 'google-oauth2|123456789'
-    const userId = `user_${id}`
+    let userId
+    if (process.env.IS_OFFLINE) {
+        userId = `user_123456789`
+    } else {
+        userId = getUserId(event)
+    }
 
     const item = await updateTeam(userId, teamId, updatedTeam);
 

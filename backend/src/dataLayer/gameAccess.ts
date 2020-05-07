@@ -121,4 +121,24 @@ export class GameAccess {
         const item = await this.docClient.update(params).promise()
         logger.info('game updated successfully', {item: item.Attributes});
     }
+
+    public async updateGameAttachment(userId: string, gameId: string, attachmentUrl: string): Promise<void> {
+        const params = {
+            TableName: this.teamsTable,
+            Key: {
+                PK: userId,
+                SK: gameId
+            },
+            UpdateExpression:
+                'set gamePicture = :gamePicture',
+            ExpressionAttributeValues: {
+                ':gamePicture': attachmentUrl
+            },
+            ReturnValues: 'UPDATED_NEW',
+        }
+        logger.info('Processing db update to add attachment to game item', {params: params})
+        
+        const res = await this.docClient.update(params).promise();
+        logger.info('game updated attachment successful', {item: res.Attributes});
+    }
 }

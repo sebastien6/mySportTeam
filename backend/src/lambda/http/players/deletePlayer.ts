@@ -5,7 +5,7 @@ import { cors, httpErrorHandler } from 'middy/middlewares'
 
 import { createLogger } from '../../../utils/logger'
 import { deletePlayer } from '../../../businessLogic/player'
-// import { getUserId } from '../utils'
+import { getUserId } from '../../utils'
 
 const logger = createLogger('api')
 
@@ -16,9 +16,12 @@ const deletePlayerHandler: APIGatewayProxyHandler = async (event: APIGatewayProx
   })
 
   const playerId = event.pathParameters.playerId;
-  //const userId = getUserId(event)
-  const id = 'google-oauth2|123456789'
-  const userId = `user_${id}`
+  let userId
+  if (process.env.IS_OFFLINE) {
+    userId = `user_123456789`
+  } else {
+    userId = getUserId(event)
+  }
 
   await deletePlayer(userId, playerId);
 

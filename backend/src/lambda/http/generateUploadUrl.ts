@@ -4,8 +4,8 @@ import * as middy from 'middy';
 import { cors, httpErrorHandler } from 'middy/middlewares';
 
 import { createLogger } from '../../utils/logger';
-import { uploadUrl } from '../../businessLogic/teams'
-// import { getUserId } from '../utils'
+import { uploadUrl } from '../../businessLogic/upload'
+import { getUserId } from '../utils'
 
 const logger = createLogger('api');
 
@@ -14,12 +14,16 @@ export const uploadUrlHandler: APIGatewayProxyHandler = async (event: APIGateway
       func: 'uploadUrlHandler',
       event: event
       })
-  const teamId = event.pathParameters.teamId;
-  //const userId = getUserId(event)
-  const id = 'google-oauth2|123456789'
-  const userId = `user_${id}`
+  const id = event.pathParameters.id;
 
-  const url = await uploadUrl(userId, teamId);
+  let userId
+  if (process.env.IS_OFFLINE) {
+    userId = `user_123456789`
+  } else {
+    userId = getUserId(event)
+  }
+  
+  const url = await uploadUrl(userId, id);
 
   return {
     statusCode: 200,

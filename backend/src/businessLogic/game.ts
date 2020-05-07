@@ -2,7 +2,7 @@ import * as uuid from 'uuid'
 import { GameItem } from '../models/gameItem'
 import { GameAccess } from '../dataLayer/gameAccess'
 // import { getUploadUrl } from '../dataLayer/s3Bucket'
-import { CreateGameRequest } from '../requests/GameRequest'
+import { CreateGameRequest, UpdateGameRequest } from '../requests/GameRequest'
 import { isValid } from '../dataLayer/validKeyExist'
 
 const gameAccess = new GameAccess();
@@ -47,9 +47,9 @@ export async function deleteGame(userId: string, gameId: string): Promise<void> 
     gameAccess.deleteGame(userId, gameId);
 }
 
-// export async function updatePlayer(userId: string, todoId: string, request: UpdatePlayerRequest): Promise<void> {
-//     playerAccess.updatePlayer(userId, todoId, request)
-// }
+export async function updateGame(userId: string, todoId: string, request: UpdateGameRequest): Promise<void> {
+    gameAccess.updateGame(userId, todoId, request)
+}
 
 // export async function uploadUrl(userId: string, teamId: string): Promise<string> {
 //     const bucketName = process.env.IMAGES_S3_BUCKET;

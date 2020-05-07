@@ -101,12 +101,12 @@ export class TeamAccess {
         logger.info('team updated successfully', {item: item.Attributes});
     }
 
-    public async updateTodoAttachment(userId: string, teamId: string, attachmentUrl: string): Promise<void> {
+    public async updateTeamAttachment(userId: string, teamId: string, attachmentUrl: string): Promise<void> {
         const params = {
             TableName: this.teamsTable,
             Key: {
-                userId: userId,
-                todoId: teamId
+                PK: userId,
+                SK: teamId
             },
             UpdateExpression:
                 'set teamPicture = :teamPicture',
@@ -115,7 +115,7 @@ export class TeamAccess {
             },
             ReturnValues: 'UPDATED_NEW',
         }
-        logger.info('Processing db update to add attachment to item', {params: params})
+        logger.info('Processing db update to add attachment to team item', {params: params})
         
         const res = await this.docClient.update(params).promise();
         logger.info('team updated attachment successful', {item: res.Attributes});

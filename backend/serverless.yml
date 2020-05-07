@@ -436,7 +436,7 @@ functions:
     events:
       - http:
           method: post
-          path: teams/{teamId}/attachment
+          path: teams/{id}/attachment
           cors: true
     deploymentSettings:
       type: Canary10Percent5Minutes

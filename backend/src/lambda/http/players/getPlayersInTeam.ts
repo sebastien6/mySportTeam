@@ -3,7 +3,7 @@ import { APIGatewayProxyEvent, APIGatewayProxyResult, APIGatewayProxyHandler } f
 import * as middy from 'middy'
 import { cors, httpErrorHandler } from 'middy/middlewares'
 
-// import { getUserId } from '../utils'
+import { getUserId } from '../../utils'
 import { createLogger } from '../../../utils/logger'
 import { getAllPlayersInTeam } from '../../../businessLogic/player'
 
@@ -15,9 +15,12 @@ export const getPlayersInTeamHandler: APIGatewayProxyHandler = async (event: API
     event: event
   })
   const teamId = event.pathParameters.teamId;
-  //const userId = getUserId(event)
-  const id = 'google-oauth2|123456789'
-  const userId = `user_${id}`
+  let userId
+  if (process.env.IS_OFFLINE) {
+    userId = `user_123456789`
+  } else {
+    userId = getUserId(event)
+  }
 
   const items = await getAllPlayersInTeam(userId, teamId)
   return {

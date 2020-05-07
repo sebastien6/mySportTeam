@@ -8,6 +8,7 @@ export interface GameItem {
     opponentScore?: number
     location: string
     date: string
+    gamePicture?: string
 }
 
 export interface GameUpdate {

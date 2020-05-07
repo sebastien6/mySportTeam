@@ -6,7 +6,7 @@ import { cors, httpErrorHandler } from 'middy/middlewares'
 import { CreatePlayerRequest } from '../../../requests/PlayerRequest'
 import { createLogger } from '../../../utils/logger'
 import { createPlayer } from '../../../businessLogic/player'
-// import { getUserId } from '../utils'
+import { getUserId } from '../../utils'
 
 const logger = createLogger('api')
 
@@ -17,17 +17,12 @@ const createPlayerHandler: APIGatewayProxyHandler = async (event: APIGatewayProx
   })
 
   const newPlayer: CreatePlayerRequest = JSON.parse(event.body);
-  //const userId = getUserId(event)
-  const id = 'google-oauth2|123456789'
-  const userId = `user_${id}`
-
-  // if (!newPlayer.jerseyNumber) {
-  //   newPlayer.jerseyNumber = 0
-  // }
-
-  // if (!newPlayer.position) {
-  //   newPlayer.position = ""
-  // }
+  let userId
+  if (process.env.IS_OFFLINE) {
+    userId = `user_123456789`
+  } else {
+    userId = getUserId(event)
+  }
 
   const item = await createPlayer(userId, newPlayer);
 

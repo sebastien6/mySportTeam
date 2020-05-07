@@ -6,7 +6,7 @@ import { cors, httpErrorHandler } from 'middy/middlewares'
 import { CreateGameRequest } from '../../../requests/GameRequest'
 import { createLogger } from '../../../utils/logger'
 import { createGame } from '../../../businessLogic/game'
-// import { getUserId } from '../utils'
+import { getUserId } from '../../utils'
 
 const logger = createLogger('api')
 
@@ -17,10 +17,12 @@ const createGameHandler: APIGatewayProxyHandler = async (event: APIGatewayProxyE
   })
 
   const newGame: CreateGameRequest = JSON.parse(event.body);
-  //const userId = getUserId(event)
-  const id = 'google-oauth2|123456789'
-  const userId = `user_${id}`
-
+  let userId
+  if (process.env.IS_OFFLINE) {
+    userId = `user_123456789`
+  } else {
+    userId = getUserId(event)
+  }
   const item = await createGame(userId, newGame);
 
   return {

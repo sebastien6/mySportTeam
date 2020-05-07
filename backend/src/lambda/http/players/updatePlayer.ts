@@ -6,7 +6,7 @@ import { cors, httpErrorHandler } from 'middy/middlewares'
 import { UpdatePlayerRequest } from '../../../requests/PlayerRequest'
 import { createLogger } from '../../../utils/logger'
 import { updatePlayer } from '../../../businessLogic/player'
-// import { getUserId } from '../utils'
+import { getUserId } from '../../utils'
 
 const logger = createLogger('api');
 
@@ -16,13 +16,16 @@ export const updateHandler: APIGatewayProxyHandler = async (event: APIGatewayPro
         event: event
     })
 
-    const teamId = event.pathParameters.teamId;
+    const playerId = event.pathParameters.playerId;
     const updatedPlayer: UpdatePlayerRequest = JSON.parse(event.body)
-    //const userId = getUserId(event);
-    const id = 'google-oauth2|123456789'
-    const userId = `user_${id}`
+    let userId
+    if (process.env.IS_OFFLINE) {
+        userId = `user_123456789`
+    } else {
+        userId = getUserId(event)
+    }
 
-    const item = await updatePlayer(userId, teamId, updatedPlayer);
+    const item = await updatePlayer(userId, playerId, updatedPlayer);
 
     return {
         statusCode: 201,
