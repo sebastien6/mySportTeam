@@ -107,3 +107,4 @@ lib
 # Webpack directories
 .webpack
 make.js
+seed.json
