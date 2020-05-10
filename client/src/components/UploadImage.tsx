@@ -9,25 +9,26 @@ enum UploadState {
   UploadingFile,
 }
 
-interface EditTeamProps {
-  match: {
-    params: {
-      teamId: string
-    }
-  }
+interface UploadImageProps {
+  // match: {
+  //   params: {
+  //     Id: string
+  //   }
+  // }
+  Id: string
   auth: Auth
 }
 
-interface EditTeamState {
+interface UploadImageState {
   file: any
   uploadState: UploadState
 }
 
-export class EditTeam extends React.PureComponent<
-  EditTeamProps,
-  EditTeamState
-> {
-  state: EditTeamState = {
+export class UploadImage extends React.PureComponent<
+  UploadImageProps,
+  UploadImageState
+  > {
+  state: UploadImageState = {
     file: undefined,
     uploadState: UploadState.NoUpload
   }
@@ -51,7 +52,7 @@ export class EditTeam extends React.PureComponent<
       }
 
       this.setUploadState(UploadState.FetchingPresignedUrl)
-      const uploadUrl = await getUploadUrl(this.props.auth.getIdToken(), this.props.match.params.teamId)
+      const uploadUrl = await getUploadUrl(this.props.auth.getIdToken(), this.props.Id)
 
       this.setUploadState(UploadState.UploadingFile)
       await uploadFile(uploadUrl, this.state.file)

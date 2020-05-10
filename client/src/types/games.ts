@@ -1,4 +1,4 @@
-export interface Game {
+export interface GameItem {
     PK: string
     SK: string
     createdAt: string
@@ -8,4 +8,5 @@ export interface Game {
     opponentScore: number
     location: string
     date: string
+    gamePicture?: string
 }

@@ -3,10 +3,17 @@ import { Link, Route, Router, Switch } from 'react-router-dom'
 import { Grid, Menu, Segment } from 'semantic-ui-react'
 
 import Auth from './auth/Auth'
-import { EditTeam } from './components/EditTeam'
+// import { EditTeam } from './components/EditTeam'
 import { LogIn } from './components/LogIn'
 import { NotFound } from './components/NotFound'
-import { Teams } from './components/Teams'
+import { Teams } from './components/teams/Teams'
+import { Team } from './components/teams/Team'
+import { Players } from './components/players/Players'
+import { Games } from './components/games/Games'
+import { CreateTeam } from './components/teams/CreateTeam'
+import { CreatePlayer } from './components/players/CreatePlayer'
+import { CreateGame } from './components/games/CreateGame'
+import { EditPlayer } from './components/players/PlayerEdit'
 
 export interface AppProps {}
 
@@ -56,8 +63,17 @@ export default class App extends Component<AppProps, AppState> {
   generateMenu() {
     return (
       <Menu>
-        <Menu.Item name="home">
+        {/* <Menu.Item name="home">
           <Link to="/">Home</Link>
+        </Menu.Item> */}
+        <Menu.Item name="Teams">
+          <Link to="/">Teams</Link>
+        </Menu.Item>
+        <Menu.Item name="Players">
+          <Link to="/players">Players</Link>
+        </Menu.Item>
+        <Menu.Item name="Games">
+          <Link to="/games">Games</Link>
         </Menu.Item>
 
         <Menu.Menu position="right">{this.logInLogOutButton()}</Menu.Menu>
@@ -97,10 +113,58 @@ export default class App extends Component<AppProps, AppState> {
         />
 
         <Route
-          path="/todos/:todoId/edit"
+          path="/team/create"
           exact
           render={props => {
-            return <EditTeam {...props} auth={this.props.auth} />
+            return <CreateTeam {...props} auth={this.props.auth} />
+          }}
+        />
+
+        <Route
+          path="/team/:teamId"
+          exact
+          render={props => {
+            return <Team {...props} auth={this.props.auth} />
+          }}
+        />
+
+        <Route
+          path="/games"
+          exact
+          render={props => {
+            return <Games {...props} auth={this.props.auth} />
+          }}
+        />
+
+        <Route
+          path="/game/create/:teamId"
+          exact
+          render={props => {
+            return <CreateGame {...props} auth={this.props.auth} />
+          }}
+        />
+
+        <Route
+          path="/players"
+          exact
+          render={props => {
+            return <Players {...props} auth={this.props.auth} />
+          }}
+        />
+
+        <Route
+          path="/player/create/:teamId"
+          exact
+          render={props => {
+            return <CreatePlayer {...props} auth={this.props.auth} />
+          }}
+        />
+
+        <Route
+          path="/player/edit/:playerId"
+          exact
+          render={props => {
+            return <EditPlayer {...props} auth={this.props.auth} />
           }}
         />
 

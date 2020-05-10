@@ -1,9 +1,9 @@
 import { apiEndpoint } from '../config'
-import { Game } from '../types/games';
+import { GameItem } from '../types/games';
 import { CreateGameRequest, UpdateGameRequest } from '../types/GameRequest';
 import Axios from 'axios'
 
-export async function getGames(idToken: string): Promise<Game[]> {
+export async function getGames(idToken: string): Promise<GameItem[]> {
     console.log('Fetching games')
 
     const response = await Axios.get(`${apiEndpoint}/games`, {
@@ -16,7 +16,7 @@ export async function getGames(idToken: string): Promise<Game[]> {
     return response.data.items
 }
 
-export async function getGame(idToken: string, gameId: string): Promise<Game> {
+export async function getGame(idToken: string, gameId: string): Promise<GameItem> {
     console.log(`Fetching game ${gameId}`)
 
     const response = await Axios.get(`${apiEndpoint}/games/${gameId}`, {
@@ -29,7 +29,7 @@ export async function getGame(idToken: string, gameId: string): Promise<Game> {
     return response.data.item
 }
 
-export async function getTeamGames(idToken: string, teamId: string): Promise<Game[]> {
+export async function getTeamGames(idToken: string, teamId: string): Promise<GameItem[]> {
     console.log(`Fetching games for team ${teamId}`)
 
     const response = await Axios.get(`${apiEndpoint}/teams/${teamId}/games`, {
@@ -43,7 +43,7 @@ export async function getTeamGames(idToken: string, teamId: string): Promise<Gam
 }
 
 
-export async function createGame(idToken: string, newGame: CreateGameRequest): Promise<Game> {
+export async function createGame(idToken: string, newGame: CreateGameRequest): Promise<GameItem> {
     console.log(`Creating game ${newGame}`)
     const response = await Axios.post(`${apiEndpoint}/games`, JSON.stringify(newGame), {
         headers: {

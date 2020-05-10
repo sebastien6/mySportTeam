@@ -1,9 +1,9 @@
 import { apiEndpoint } from '../config'
-import { Player } from '../types/players';
+import { PlayerItem } from '../types/players';
 import { CreatePlayerRequest, UpdatePlayerRequest } from '../types/PlayerRequest';
 import Axios from 'axios'
 
-export async function getPlayers(idToken: string): Promise<Player[]> {
+export async function getPlayers(idToken: string): Promise<PlayerItem[]> {
     console.log('Fetching players')
 
     const response = await Axios.get(`${apiEndpoint}/players`, {
@@ -16,7 +16,7 @@ export async function getPlayers(idToken: string): Promise<Player[]> {
     return response.data.items
 }
 
-export async function getPlayer(idToken: string, playerId: string): Promise<Player> {
+export async function getPlayer(idToken: string, playerId: string): Promise<PlayerItem> {
     console.log(`Fetching player ${playerId}`)
 
     const response = await Axios.get(`${apiEndpoint}/players/${playerId}`, {
@@ -26,10 +26,10 @@ export async function getPlayer(idToken: string, playerId: string): Promise<Play
         },
     })
     console.log('Player:', response.data)
-    return response.data.item
+    return response.data.items
 }
 
-export async function getTeamPlayers(idToken: string, teamId: string): Promise<Player[]> {
+export async function getTeamPlayers(idToken: string, teamId: string): Promise<PlayerItem[]> {
     console.log(`Fetching players in a team ${teamId}`)
 
     const response = await Axios.get(`${apiEndpoint}/teams/${teamId}/players`, {
@@ -42,9 +42,10 @@ export async function getTeamPlayers(idToken: string, teamId: string): Promise<P
     return response.data.items
 }
 
-export async function createPlayer(idToken: string, newPlayer: CreatePlayerRequest): Promise<Player> {
-    console.log(`Creating player ${newPlayer.firstName} ${newPlayer.lastName}`)
-    const response = await Axios.post(`${apiEndpoint}/players`, JSON.stringify(newPlayer), {
+export async function createPlayer(idToken: string, newPlayer: CreatePlayerRequest): Promise<PlayerItem> {
+    const player = JSON.stringify(newPlayer)
+    console.log(`Creating player ${player}`)
+    const response = await Axios.post(`${apiEndpoint}/players`, player, {
         headers: {
             'Content-Type': 'application/json',
             'Authorization': `Bearer ${idToken}`

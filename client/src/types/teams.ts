@@ -1,6 +1,6 @@
-export interface Team {
-    userId: string
-    teamId: string
+export interface TeamItem {
+    PK: string
+    SK: string
     createdAt: string
     name: string
     sport: string

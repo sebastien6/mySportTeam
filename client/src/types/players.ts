@@ -1,4 +1,4 @@
-export interface Player {
+export interface PlayerItem {
     PK: string
     SK: string
     createdAt: string
@@ -6,7 +6,7 @@ export interface Player {
     firstName: string
     lastName: string
     yearOfBirth: number
-    jerseyNumber?: number
-    position?: string
+    jerseyNumber: number
+    position: string
     playerPicture?: string
 }

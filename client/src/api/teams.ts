@@ -1,9 +1,9 @@
 import { apiEndpoint } from '../config'
-import { Team } from '../types/teams';
+import { TeamItem } from '../types/teams';
 import { CreateTeamRequest, UpdateTeamRequest } from '../types/TeamRequest';
 import Axios from 'axios'
 
-export async function getTeams(idToken: string): Promise<Team[]> {
+export async function getTeams(idToken: string): Promise<TeamItem[]> {
     console.log('Fetching teams')
 
     const response = await Axios.get(`${apiEndpoint}/teams`, {
@@ -16,7 +16,7 @@ export async function getTeams(idToken: string): Promise<Team[]> {
     return response.data.items
 }
 
-export async function getTeam(idToken: string, teamId: string): Promise<Team> {
+export async function getTeam(idToken: string, teamId: string): Promise<TeamItem> {
     console.log(`Fetching team ${teamId}`)
 
     const response = await Axios.get(`${apiEndpoint}/teams/${teamId}`, {
@@ -26,10 +26,10 @@ export async function getTeam(idToken: string, teamId: string): Promise<Team> {
         },
     })
     console.log('Team:', response.data)
-    return response.data.item
+    return response.data.team
 }
 
-export async function createTeam(idToken: string, newTeam: CreateTeamRequest): Promise<Team> {
+export async function createTeam(idToken: string, newTeam: CreateTeamRequest): Promise<TeamItem> {
     console.log(`Creating team ${newTeam.name}`)
     const response = await Axios.post(`${apiEndpoint}/teams`, JSON.stringify(newTeam), {
         headers: {
