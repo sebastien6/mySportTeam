@@ -9,9 +9,9 @@ import { getUserId } from '../../utils'
 
 const logger = createLogger('api')
 
-export const getTodoHandler: APIGatewayProxyHandler = async (event: APIGatewayProxyEvent): Promise<APIGatewayProxyResult> => {
+export const getTeamHandler: APIGatewayProxyHandler = async (event: APIGatewayProxyEvent): Promise<APIGatewayProxyResult> => {
   logger.info('Processing event', {
-    func: 'getTodohandler',
+    func: 'getTeamhandler',
     event: event
   })
   const teamId = event.pathParameters.teamId;
@@ -31,6 +31,6 @@ export const getTodoHandler: APIGatewayProxyHandler = async (event: APIGatewayPr
   };
 }
 
-export const handler = middy(getTodoHandler)
+export const handler = middy(getTeamHandler)
   .use(httpErrorHandler())
   .use(cors({ credentials: true }));

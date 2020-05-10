@@ -12,7 +12,7 @@ const logger = createLogger('api');
 
 export const updateHandler: APIGatewayProxyHandler = async (event: APIGatewayProxyEvent): Promise<APIGatewayProxyResult> => {
     logger.info('Processing event', {
-        func: 'createTodoHandler',
+        func: 'createGameHandler',
         event: event
     })
 

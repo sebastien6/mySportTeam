@@ -30,10 +30,10 @@ export async function createTeam(userId: string, request: CreateTeamRequest): Pr
     return teamAccess.createTeam(teamItem);
 }
 
-export async function deleteTeam(userId: string, todoId: string): Promise<void> {
-    teamAccess.deleteTeam(userId, todoId);
+export async function deleteTeam(userId: string, teamId: string): Promise<void> {
+    teamAccess.deleteTeam(userId, teamId);
 }
 
-export async function updateTeam(userId: string, todoId: string, request: UpdateTeamRequest): Promise<void> {
-    teamAccess.updateTeam(userId, todoId, request)
+export async function updateTeam(userId: string, teamId: string, request: UpdateTeamRequest): Promise<void> {
+    teamAccess.updateTeam(userId, teamId, request)
 }
