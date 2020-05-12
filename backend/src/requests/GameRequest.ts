@@ -4,16 +4,16 @@
 export interface CreateGameRequest {
     teamId: string
     opponentTeam: string
-    teamScore?: number
-    opponentScore?: number
+    teamScore: number
+    opponentScore: number
     location: string
     date: string
 }
 
 export interface UpdateGameRequest {
     opponentTeam: string
-    teamScore?: number
-    opponentScore?: number
+    teamScore: number
+    opponentScore: number
     location: string
     date: string
 }

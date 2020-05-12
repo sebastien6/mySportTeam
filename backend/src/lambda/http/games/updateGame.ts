@@ -18,12 +18,7 @@ export const updateHandler: APIGatewayProxyHandler = async (event: APIGatewayPro
 
     const gameId = event.pathParameters.gameId;
     const updatedGame: UpdateGameRequest = JSON.parse(event.body)
-    let userId
-    if (process.env.IS_OFFLINE) {
-        userId = `user_123456789`
-    } else {
-        userId = getUserId(event)
-    }
+    const userId = getUserId(event)
 
     const item = await updateGame(userId, gameId, updatedGame);
 

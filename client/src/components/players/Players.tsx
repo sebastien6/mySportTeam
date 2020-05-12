@@ -50,9 +50,6 @@ export class Players extends React.PureComponent<PlayersProps, PlayersState> {
       <div>
         <Header as="h1">PLAYERS</Header>
 
-        <Button type="submit">
-          New Player
-        </Button>
         <Divider />
 
         {this.renderPlayers()}

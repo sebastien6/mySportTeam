@@ -3,11 +3,11 @@ import { History } from 'history'
 import { Form, Button, Input, Label, Grid, Loader, GridRow, GridColumn, Divider, Message } from 'semantic-ui-react'
 
 import Auth from '../../auth/Auth'
-import { PlayerRequest } from '../../types/PlayerRequest'
-import { patchPlayer, getPlayer, createPlayer, deletePlayer } from '../../api/players'
+import { TeamRequest } from '../../types/TeamRequest'
+import { patchTeam, getTeam, createTeam, deleteTeam } from '../../api/teams'
 import { UploadImage } from '../UploadImage'
 
-interface EditPlayerProps {
+interface EditTeamProps {
     match: {
         params: {
             Id: string
@@ -17,8 +17,8 @@ interface EditPlayerProps {
     history: History
 }
 
-interface EditPlayerState {
-    player: PlayerRequest
+interface EditTeamState {
+    team: TeamRequest
     teamId: string
     loading: boolean
     editMode: boolean
@@ -26,14 +26,13 @@ interface EditPlayerState {
     showWarning: boolean
 }
 
-export class EditPlayer extends React.PureComponent<EditPlayerProps, EditPlayerState> {
-    state: EditPlayerState = {
-        player: {
-            firstName: '',
-            lastName: '',
-            yearOfBirth: 1900,
-            position: "none",
-            jerseyNumber: 0
+export class EditTeam extends React.PureComponent<EditTeamProps, EditTeamState> {
+    state: EditTeamState = {
+        team: {
+            name: '',
+            sport: '',
+            season: '',
+            retired: false
         },
         teamId: '',
         loading: true,
@@ -45,20 +44,18 @@ export class EditPlayer extends React.PureComponent<EditPlayerProps, EditPlayerS
     async componentDidMount() {
         const id = this.props.match.params.Id
 
-        if (id.startsWith('team')) {
-            const player = { ...this.state.player, ['teamId']: this.props.match.params.Id }
-            this.setState(() => ({ player, teamId: this.props.match.params.Id, loading: false }))
-        } else if (id.startsWith('player')) {
-            const fetchedPlayer = await getPlayer(this.props.auth.getIdToken(), this.props.match.params.Id)
-            const player: PlayerRequest = {
-                firstName: fetchedPlayer.firstName,
-                lastName: fetchedPlayer.lastName,
-                yearOfBirth: fetchedPlayer.yearOfBirth,
-                jerseyNumber: fetchedPlayer.jerseyNumber,
-                position: fetchedPlayer.position
+        if (id === 'new') {
+            this.setState(() => ({ teamId: this.props.match.params.Id, loading: false }))
+        } else if (id.startsWith('team')) {
+            const fetchedTeam = await getTeam(this.props.auth.getIdToken(), this.props.match.params.Id)
+            const team: TeamRequest = {
+                name: fetchedTeam.name,
+                sport: fetchedTeam.sport,
+                season: fetchedTeam.season,
+                retired: fetchedTeam.retired
             }
 
-            this.setState(() => ({ player, teamId: fetchedPlayer.GSI1, loading: false, editMode: true }))
+            this.setState(() => ({ team, teamId: fetchedTeam.SK, loading: false, editMode: true }))
         } else {
             alert(`Invalid URI path`)
         }
@@ -71,10 +68,10 @@ export class EditPlayer extends React.PureComponent<EditPlayerProps, EditPlayerS
         if (this.state.errors.length > 0) {
             this.setState(() => ({ showWarning: true }))
         } else if (this.state.editMode) {
-            await patchPlayer(this.props.auth.getIdToken(), this.props.match.params.Id, this.state.player)
+            await patchTeam(this.props.auth.getIdToken(), this.props.match.params.Id, this.state.team)
             this.props.history.goBack()
         } else {
-            await createPlayer(this.props.auth.getIdToken(), this.state.player)
+            await createTeam(this.props.auth.getIdToken(), this.state.team)
             this.props.history.goBack()
         }
     }
@@ -82,41 +79,35 @@ export class EditPlayer extends React.PureComponent<EditPlayerProps, EditPlayerS
     handleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
         const { name, type, value } = event.target
         if (type === 'text') {
-            const player = { ...this.state.player, [name]: value }
-            this.setState(() => ({ player }))
-        }
-
-        if (type === 'number') {
-            const player = { ...this.state.player, [name]: parseInt(value) }
-            this.setState(() => ({ player }))
+            const team = { ...this.state.team, [name]: value }
+            this.setState(() => ({ team }))
         }
     }
 
+    handleCheckClick = () => {
+        console.log('click and do nothing :(')
+        const team = this.state.team
+        team.retired = !this.state.team.retired
+        this.setState({ team: team });
+        this.forceUpdate()
+      }
+
     validateFields() {
-        if (this.state.player.firstName.length === 0) {
-            this.state.errors.push('Add player first name')
+        if (this.state.team.name.length === 0) {
+            this.state.errors.push('Add a team name')
         }
 
-        if (this.state.player.lastName.length === 0) {
-            this.state.errors.push('Add player last name')
+        if (this.state.team.sport.length === 0) {
+            this.state.errors.push('Add a sport (baseball, hockey, volleyball, football, ...)')
         }
 
-        if (this.state.player.yearOfBirth === NaN) {
-            this.state.errors.push('Add player year of birth (YYYY)')
+        if (this.state.team.season.length === 0) {
+            this.state.errors.push('Add a season (1999, 2003-2004)')
         }
-
-        if (this.state.player.lastName.length === 0) {
-            this.state.errors.push('Add player position or none or N/A')
-        }
-
-        if (this.state.player.yearOfBirth === NaN) {
-            this.state.errors.push('Add player jersey number or 0')
-        }
-        
     }
 
     async onDeleteClick() {
-        await deletePlayer(this.props.auth.getIdToken(), this.props.match.params.Id)
+        await deleteTeam(this.props.auth.getIdToken(), this.props.match.params.Id)
         this.props.history.goBack()
     }
 
@@ -130,11 +121,11 @@ export class EditPlayer extends React.PureComponent<EditPlayerProps, EditPlayerS
         )
     }
 
-    renderPlayer() {
+    renderTeam() {
         return (
             <div>
                 {this.state.showWarning ? this.renderErrors() : null}
-                {this.renderPlayerForm()}
+                {this.renderTeamForm()}
                 <Divider></Divider>
                 {this.state.editMode
                     ? <UploadImage Id={this.props.match.params.Id} auth={this.props.auth}  history={this.props.history}/>
@@ -149,7 +140,7 @@ export class EditPlayer extends React.PureComponent<EditPlayerProps, EditPlayerS
                 <Grid>
                     <GridRow>
                         <GridColumn width={13}>
-                            {this.state.editMode ? <h1>Update Player</h1> : <h1>Create New Player</h1>}
+                            {this.state.editMode ? <h1>Update Team</h1> : <h1>Create New Team</h1>}
 
                         </GridColumn>
                         <GridColumn width={2}>
@@ -158,7 +149,7 @@ export class EditPlayer extends React.PureComponent<EditPlayerProps, EditPlayerS
                     </GridRow>
                 </Grid>
 
-                {this.state.loading ? this.renderLoading() : this.renderPlayer()}
+                {this.state.loading ? this.renderLoading() : this.renderTeam()}
             </div>
         )
     }
@@ -180,71 +171,53 @@ export class EditPlayer extends React.PureComponent<EditPlayerProps, EditPlayerS
         )
     }
 
-    renderPlayerForm(): JSX.Element {
+    renderTeamForm(): JSX.Element {
         return (
             <div>
                 <Form onSubmit={this.handleSubmit}>
                     <Form.Field>
-                        <Label>First Name</Label>
+                        <Label>Team Name</Label>
                         <Input
                             type='text'
-                            name='firstName'
-                            placeholder='Add player first name'
-                            value={this.state.player.firstName}
+                            name='name'
+                            placeholder='Add a team name'
+                            value={this.state.team.name}
                             onChange={this.handleChange}
                         />
                     </Form.Field>
 
                     <Form.Field>
-                        <Label>Last Name</Label>
+                        <Label>Sport</Label>
                         <Input
                             type='text'
-                            name='lastName'
-                            placeholder='Add player last name'
-                            value={this.state.player.lastName}
+                            name='sport'
+                            placeholder='Add a sport (baseball, hockey, volleyball, football, ...)'
+                            value={this.state.team.sport}
                             onChange={this.handleChange}
                         />
                     </Form.Field>
 
                     <Form.Field>
-                        <Label>Born in</Label>
-                        <Input
-                            type='number'
-                            name='yearOfBirth'
-                            placeholder='Add player year of birth (yyyy)'
-                            value={this.state.player.yearOfBirth}
-                            onChange={this.handleChange}
-                            min="1900"
-                            max="2099"
-                            start='1'
-                            step="1"
-                        />
-                    </Form.Field>
-
-                    <Form.Field>
-                        <Label>Position </Label>
+                        <Label>Season</Label>
                         <Input
                             type='text'
-                            name='position'
-                            placeholder='Add player position or none or N/A'
-                            value={this.state.player.position}
+                            name='season'
+                            placeholder='Add a season (1999, 2003-2004)'
+                            value={this.state.team.season}
                             onChange={this.handleChange}
                         />
                     </Form.Field>
-
                     <Form.Field>
-                        <Label>Jersey Number </Label>
+                        <Label>
                         <Input
-                            type='number'
-                            name='jerseyNumber'
-                            placeholder='Add player jersey number or 0'
-                            value={this.state.player.jerseyNumber}
-                            onChange={this.handleChange}
-                            min="0"
-                            max="200"
-                            step="1"
-                        />
+                            type='checkbox'
+                            name='retired'
+                            checked={this.state.team.retired ? true : false}
+                            onChange={this.handleCheckClick}
+                        /> Retired
+                        </Label>
                     </Form.Field>
+                    
                     <Grid>
                         <GridRow>
                             <GridColumn width='2'>

@@ -6,15 +6,14 @@ export interface CreatePlayerRequest {
     firstName: string
     lastName: string
     yearOfBirth: number
-    jerseyNumber?: number
-    position?: string
+    jerseyNumber: number
+    position: string
   }
 
 export interface UpdatePlayerRequest {
-    teamId: string
     firstName: string
     lastName: string
     yearOfBirth: number
-    jerseyNumber?: number
-    position?: string
+    jerseyNumber: number
+    position: string
 }

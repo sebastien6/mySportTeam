@@ -5,7 +5,7 @@ export interface TeamItem {
     name: string
     sport: string
     season: string
-    retired?: boolean
+    retired: boolean
     teamPicture?: string
   }
 

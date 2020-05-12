@@ -60,9 +60,13 @@ export class GameCard extends React.PureComponent<GameProps, GameState> {
     }
   }
 
+  onEditClick() {
+    this.props.history.push(`/game/edit/${this.state.game.SK}`)
+  }
+
   render() {
     return (
-        <Card color={this.pickColor()}>
+        <Card color={this.pickColor()} onClick={() => this.onEditClick()}>
         <Image src={this.state.game.gamePicture} wrapped ui={false} />
         <Card.Content>
           <Card.Header>vs {this.state.game.opponentTeam}</Card.Header>

@@ -17,11 +17,10 @@
       }
     },
     "required": [
-        "name",
-        "sport",
-        "season",
-        "retired"
-      ],
+      "name",
+      "sport",
+      "season"
+    ],
     "additionalProperties": false
   }
   

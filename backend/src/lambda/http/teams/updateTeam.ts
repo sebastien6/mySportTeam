@@ -18,12 +18,7 @@ export const updateHandler: APIGatewayProxyHandler = async (event: APIGatewayPro
 
     const teamId = event.pathParameters.teamId;
     const updatedTeam: UpdateTeamRequest = JSON.parse(event.body)
-    let userId
-    if (process.env.IS_OFFLINE) {
-        userId = `user_123456789`
-    } else {
-        userId = getUserId(event)
-    }
+    const userId = getUserId(event)
 
     const item = await updateTeam(userId, teamId, updatedTeam);
 

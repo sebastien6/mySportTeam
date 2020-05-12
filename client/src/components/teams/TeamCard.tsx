@@ -4,6 +4,7 @@ import { Card, Image, Icon } from 'semantic-ui-react'
 
 // import Auth from '../../auth/Auth'
 import { TeamItem } from '../../types/teams'
+import { generateKeyPair } from 'crypto'
 
 interface TeamProps {
   team: TeamItem
@@ -31,8 +32,11 @@ export class TeamCard extends React.PureComponent<TeamProps, TeamState> {
   }
 
   pickSportIcon(sportName: string) {
-    switch (sportName) {
-        case 'Hockey':
+    if (sportName === undefined) {
+      sportName = 'None'
+    }
+    switch (sportName.toLowerCase()) {
+        case 'hockey':
             return <Icon name='hockey puck'/>;
         case 'baseball':
             return <Icon name='baseball ball'/>;
@@ -62,10 +66,11 @@ export class TeamCard extends React.PureComponent<TeamProps, TeamState> {
   render() {
     console.log('this.state.team.name')
     return (
-        <Card onClick={() => this.handleClick(this.state.team.SK)} color={!this.state.team.retired ? 'blue' : 'grey'}>
+        <Card onClick={() => this.handleClick(this.state.team.SK)} color={this.state.team.retired ? 'grey' : 'teal'}>
             <Image src={this.state.team.teamPicture} wrapped ui={false} />
             <Card.Content>
-                <Card.Header>{this.state.team.name}</Card.Header>
+    <Card.Header>{this.state.team.name}   
+    {this.state.team.retired ? <span>&nbsp;&nbsp;(Retired)</span> : null }</Card.Header>
                 <Card.Meta>
                 <span className='date'>Season: {this.state.team.season}</span>
                 </Card.Meta>

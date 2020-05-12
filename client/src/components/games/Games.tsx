@@ -50,9 +50,6 @@ export class Games extends React.PureComponent<GamesProps, GamesState> {
       <div>
         <Header as="h1">GAMES</Header>
 
-        <Button type="submit">
-          New Game
-        </Button>
         <Divider />
 
         {this.renderGames()}

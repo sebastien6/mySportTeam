@@ -4,7 +4,6 @@ import { Card, Image, Icon } from 'semantic-ui-react'
 
 import Auth from '../../auth/Auth'
 import { PlayerItem } from '../../types/players'
-import { deletePlayer } from '../../api/players'
 
 interface PlayerProps {
   player: PlayerItem
@@ -32,18 +31,13 @@ export class PlayerCard extends React.PureComponent<PlayerProps, PlayerState> {
     }
   }
 
-  async onDeleteClick(playerId: string) {
-    await deletePlayer(this.props.auth.getIdToken(), playerId)
-    this.props.history.push(`/team/${this.state.player.GSI1}`)
-  }
-
-  onEditClick(playerId: string) {
+  onEditClick() {
     this.props.history.push(`/player/edit/${this.state.player.SK}`)
   }
 
   render(): JSX.Element {
     return (
-        <Card color='olive'>
+        <Card color='olive' onClick={() => this.onEditClick()}>
         <Image src={this.state.player.playerPicture} wrapped ui={false} />
         <Card.Content>
           <Card.Header>{this.state.player.firstName} {this.state.player.lastName}</Card.Header>
@@ -55,11 +49,7 @@ export class PlayerCard extends React.PureComponent<PlayerProps, PlayerState> {
           </Card.Meta>
         </Card.Content>
         <Card.Content extra>
-            Jersey #: <h2>{this.state.player.jerseyNumber}</h2>
-           
-              <Icon link name='delete' onClick={() => this.onDeleteClick(this.state.player.SK)} floating='right'/>
-              <Icon link name='edit' onClick={() => this.onEditClick(this.state.player.SK)} floating='right'/>
-            
+            Jersey #: {this.state.player.jerseyNumber}
         </Card.Content>
       </Card>
     )

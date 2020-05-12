@@ -4,8 +4,8 @@ export interface GameItem {
     createdAt: string
     GSI1: string
     opponentTeam: string
-    teamScore?: number
-    opponentScore?: number
+    teamScore: number
+    opponentScore: number
     location: string
     date: string
     gamePicture?: string
@@ -13,8 +13,8 @@ export interface GameItem {
 
 export interface GameUpdate {
     opponentTeam: string
-    teamScore?: number
-    opponentScore?: number
+    teamScore: number
+    opponentScore: number
     location: string
     date: string
 }

@@ -3,17 +3,16 @@ import { Link, Route, Router, Switch } from 'react-router-dom'
 import { Grid, Menu, Segment } from 'semantic-ui-react'
 
 import Auth from './auth/Auth'
-// import { EditTeam } from './components/EditTeam'
 import { LogIn } from './components/LogIn'
 import { NotFound } from './components/NotFound'
 import { Teams } from './components/teams/Teams'
 import { Team } from './components/teams/Team'
+import { EditTeam } from './components/teams/TeamEdit'
 import { Players } from './components/players/Players'
-import { Games } from './components/games/Games'
-import { CreateTeam } from './components/teams/CreateTeam'
-import { CreatePlayer } from './components/players/CreatePlayer'
-import { CreateGame } from './components/games/CreateGame'
 import { EditPlayer } from './components/players/PlayerEdit'
+import { Games } from './components/games/Games'
+import { EditGame } from './components/games/GameEdit'
+
 
 export interface AppProps {}
 
@@ -113,10 +112,10 @@ export default class App extends Component<AppProps, AppState> {
         />
 
         <Route
-          path="/team/create"
+          path="/team/edit/:Id"
           exact
           render={props => {
-            return <CreateTeam {...props} auth={this.props.auth} />
+            return <EditTeam {...props} auth={this.props.auth} />
           }}
         />
 
@@ -137,10 +136,10 @@ export default class App extends Component<AppProps, AppState> {
         />
 
         <Route
-          path="/game/create/:teamId"
+          path="/game/edit/:Id"
           exact
           render={props => {
-            return <CreateGame {...props} auth={this.props.auth} />
+            return <EditGame {...props} auth={this.props.auth} />
           }}
         />
 
@@ -153,15 +152,7 @@ export default class App extends Component<AppProps, AppState> {
         />
 
         <Route
-          path="/player/create/:teamId"
-          exact
-          render={props => {
-            return <CreatePlayer {...props} auth={this.props.auth} />
-          }}
-        />
-
-        <Route
-          path="/player/edit/:playerId"
+          path="/player/edit/:Id"
           exact
           render={props => {
             return <EditPlayer {...props} auth={this.props.auth} />

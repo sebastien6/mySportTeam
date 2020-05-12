@@ -134,7 +134,7 @@ functions:
           cors: true
           request:
             schema:
-              application/json: ${file(models/create-team-request.json)}
+              application/json: ${file(models/team-request.json)}
           documentation:
             summary: Create a new team item
             description: Create a new team, with a sport, ans season
@@ -157,7 +157,7 @@ functions:
           cors: true
           request:
             schema:
-              application/json: ${file(models/update-team-request.json)}
+              application/json: ${file(models/team-request.json)}
           documentation:
             summary: Update a team item
             description: Update a team item name, season, sport or retired status

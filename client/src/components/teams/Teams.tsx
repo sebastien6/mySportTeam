@@ -87,7 +87,7 @@ export class Teams extends React.PureComponent<TeamsProps, TeamsState> {
   }
 
   handleNewTeamClick() {
-    this.props.history.push(`/team/create`)
+    this.props.history.push(`/team/edit/new`)
   }
 
   renderTeamsList() {

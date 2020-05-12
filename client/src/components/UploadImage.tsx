@@ -1,4 +1,5 @@
 import * as React from 'react'
+import { History } from 'history'
 import { Form, Button } from 'semantic-ui-react'
 import Auth from '../auth/Auth'
 import { getUploadUrl, uploadFile } from '../api/uploadFile'
@@ -10,13 +11,9 @@ enum UploadState {
 }
 
 interface UploadImageProps {
-  // match: {
-  //   params: {
-  //     Id: string
-  //   }
-  // }
   Id: string
   auth: Auth
+  history: History
 }
 
 interface UploadImageState {
@@ -56,7 +53,7 @@ export class UploadImage extends React.PureComponent<
 
       this.setUploadState(UploadState.UploadingFile)
       await uploadFile(uploadUrl, this.state.file)
-
+      this.props.history.goBack()
       alert('File was uploaded!')
     } catch (e) {
       alert('Could not upload a file: ' + e.message)
@@ -100,6 +97,7 @@ export class UploadImage extends React.PureComponent<
         {this.state.uploadState === UploadState.FetchingPresignedUrl && <p>Uploading image metadata</p>}
         {this.state.uploadState === UploadState.UploadingFile && <p>Uploading file</p>}
         <Button
+          color='blue'
           loading={this.state.uploadState !== UploadState.NoUpload}
           type="submit"
         >

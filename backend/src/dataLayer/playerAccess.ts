@@ -94,6 +94,8 @@ export class PlayerAccess {
         }
         logger.info('Processing db delete item with params', {params: params})
 
+        
+
         const result = await this.docClient.delete(params).promise()
         logger.info('team deleted successfully', {team: result.Attributes})
     }

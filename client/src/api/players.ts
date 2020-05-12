@@ -1,6 +1,6 @@
 import { apiEndpoint } from '../config'
 import { PlayerItem } from '../types/players';
-import { CreatePlayerRequest, UpdatePlayerRequest } from '../types/PlayerRequest';
+import { PlayerRequest } from '../types/PlayerRequest';
 import Axios from 'axios'
 
 export async function getPlayers(idToken: string): Promise<PlayerItem[]> {
@@ -42,7 +42,7 @@ export async function getTeamPlayers(idToken: string, teamId: string): Promise<P
     return response.data.items
 }
 
-export async function createPlayer(idToken: string, newPlayer: CreatePlayerRequest): Promise<PlayerItem> {
+export async function createPlayer(idToken: string, newPlayer: PlayerRequest): Promise<PlayerItem> {
     const player = JSON.stringify(newPlayer)
     console.log(`Creating player ${player}`)
     const response = await Axios.post(`${apiEndpoint}/players`, player, {
@@ -54,22 +54,35 @@ export async function createPlayer(idToken: string, newPlayer: CreatePlayerReque
     return response.data.item
 }
 
-export async function patchPlayer(idToken: string, playerId: string, updatedPlayer: UpdatePlayerRequest): Promise<void> {
-    console.log(`Updating player ${playerId}`)
-    await Axios.patch(`${apiEndpoint}/players/${playerId}`, JSON.stringify(updatedPlayer), {
-        headers: {
-            'Content-Type': 'application/json',
-            'Authorization': `Bearer ${idToken}`
-        }
-    })
+export async function patchPlayer(idToken: string, playerId: string, updatedPlayer: PlayerRequest): Promise<void> {
+    const player: string = JSON.stringify(updatedPlayer)
+    console.log(`Updating player ${playerId}, ${player}`)
+    try {
+        await Axios.patch(`${apiEndpoint}/players/${playerId}`, player, {
+            headers: {
+                'Content-Type': 'application/json',
+                'Authorization': `Bearer ${idToken}`
+            }
+        })
+    } catch (e) {
+        const msg = `Failed to patch player ${playerId}:`
+        console.log(`${msg} ${JSON.stringify(e)}`)
+        alert(`${msg} ${e.message}`)
+    }
 }
 
 export async function deletePlayer(idToken: string, playerId: string): Promise<void> {
     console.log(`Deleting player ${playerId}`)
-    await Axios.delete(`${apiEndpoint}/players/${playerId}`, {
-        headers: {
-            'Content-Type': 'application/json',
-            'Authorization': `Bearer ${idToken}`
-        }
-    })
+    try {
+        await Axios.delete(`${apiEndpoint}/players/${playerId}`, {
+            headers: {
+                'Content-Type': 'application/json',
+                'Authorization': `Bearer ${idToken}`
+            }
+        })
+    } catch (e) {
+        const msg = `Failed to delete player ${playerId}:`
+        console.log(`${msg} ${JSON.stringify(e)}`)
+        alert(`${msg} ${e.message}`)
+    }
 }
