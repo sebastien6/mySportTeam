@@ -33,15 +33,17 @@ when user click on save, the user is bring back to its previous screen.
 
 # Rest API
 
-Open the collection and environemnt file in the postman folder in your postman application to see the available API calls.
+The postman folder contain a collection and environment files with available API calls online and offline.
 
 Note: use the web UI to generate a token by login into the app and update your postman enviroment with the updated token tu ensure successful API calls.
 
-### Create a team
+## Team API
 
+### Create a team
 
 POST https://{{apiId}}.execute-api.us-east-1.amazonaws.com/dev/teams
 
+body example:
 ```
 {
 	"season": "2020",
@@ -51,18 +53,20 @@ POST https://{{apiId}}.execute-api.us-east-1.amazonaws.com/dev/teams
 }
 ```
 
-
 ### Get all Teams
+
 GET https://{{apiId}}.execute-api.us-east-1.amazonaws.com/dev/teams
 
 
-
 ### Get a team
+
 GET https://{{apiId}}.execute-api.us-east-1.amazonaws.com/dev/teams/{teamId}
 
 ### Update a team
+
 PATCH https://{{apiId}}.execute-api.us-east-1.amazonaws.com/dev/teams/{teamId}
 
+body example:
 ```
 {
 	"season": "2020",
@@ -73,10 +77,99 @@ PATCH https://{{apiId}}.execute-api.us-east-1.amazonaws.com/dev/teams/{teamId}
 ```
 
 ### Delete a team
+
 DELETE https://{{apiId}}.execute-api.us-east-1.amazonaws.com/dev/teams/{teamId}
 
+## Player API
+
+### Create a player
+
+POST https://{{apiId}}.execute-api.us-east-1.amazonaws.com/dev/players
+
+body example:
+```
+{
+	"season": "2020",
+	"name": "Team Red",
+	"sport": "Baseball",
+	"retired": false
+}
+```
+
+### Get all players
+
+GET https://{{apiId}}.execute-api.us-east-1.amazonaws.com/dev/players
+
+
+### Get a player
+
+GET https://{{apiId}}.execute-api.us-east-1.amazonaws.com/dev/players/{playerId}
+
+### Update a player
+
+PATCH https://{{apiId}}.execute-api.us-east-1.amazonaws.com/dev/players/{playerId}
+
+body example:
+```
+{
+	"season": "2020",
+	"name": "Team Red",
+	"sport": "Baseball",
+	"retired": false
+}
+```
+
+### Delete a player
+
+DELETE https://{{apiId}}.execute-api.us-east-1.amazonaws.com/dev/players/{playerId}
+
+## Game API
+
+### Create a game
+
+POST https://{{apiId}}.execute-api.us-east-1.amazonaws.com/dev/games
+
+body example:
+```
+{
+	"season": "2020",
+	"name": "Team Red",
+	"sport": "Baseball",
+	"retired": false
+}
+```
+
+### Get all games
+
+GET https://{{apiId}}.execute-api.us-east-1.amazonaws.com/dev/games
+
+
+### Get a game
+
+GET https://{{apiId}}.execute-api.us-east-1.amazonaws.com/dev/games/{gameId}
+
+### Update a game
+
+PATCH https://{{apiId}}.execute-api.us-east-1.amazonaws.com/dev/games/{gameId}
+
+body example:
+```
+{
+	"season": "2020",
+	"name": "Team Red",
+	"sport": "Baseball",
+	"retired": false
+}
+```
+
+### Delete a game
+
+DELETE https://{{apiId}}.execute-api.us-east-1.amazonaws.com/dev/games/{gameId}
+
+## Attechmant URL API
 
 ### Get an attachment URL
+
 GET https://{{apiId}}.execute-api.us-east-1.amazonaws.com/dev/attachment/{id}
 
 base on the provided id, teamId, PlayerId, or GameId, the attachement is associated to the corresponding team, player or game.
@@ -110,4 +203,6 @@ the configuration for serverless offiline includes:
 - offline-s3
 - offline SNS
 
-the postman collection file contain a folder for call to the offline API.
+The postman folder contain a collection and environment files with available API calls online and offline.
+
+Note: use the web UI to generate a token by login into the app and update your postman enviroment with the updated token tu ensure successful API calls.
