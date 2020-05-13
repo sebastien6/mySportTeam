@@ -42,13 +42,13 @@
 							},
 							{
 								"key": "Authorization",
-								"value": "Beare {{authToken}}",
+								"value": "Bearer {{authToken}}",
 								"type": "text"
 							}
 						],
 						"body": {
 							"mode": "raw",
-							"raw": "{\n\t\"teamId\": \"team_287d9159-69a0-4958-a413-b1b38f99fae7\",\n    \"firstName\": \"Frodo\",\n    \"lastName\": \"Baggins\",\n    \"yearOfBirth\": 2006,\n    \"jerseyNumber\": 13,\n    \"position\": \"defense\"\n}"
+							"raw": "{\n\t\"opponentTeam\": \"the warriors\",\n    \"date\": \"2020-06-10\",\n    \"location\": \"Rohan\",\n    \"teamId\": \"team_721ec865-6f5e-4cc3-a463-66a5966dc8e5\",\n    \"teamScore\": 0,\n    \"opponentScore\": 0\n}"
 						},
 						"url": {
 							"raw": "{{endpoint}}/games",
@@ -69,18 +69,18 @@
 						"header": [
 							{
 								"key": "Authorization",
-								"value": "Beare {{authToken}}",
+								"value": "Bearer {{authToken}}",
 								"type": "text"
 							}
 						],
 						"url": {
-							"raw": "{{endpoint}}/games/player_fe090bb0-6d2e-4ec1-ad86-95af1861d343",
+							"raw": "{{endpoint}}/games/game_a1d0f722-008e-45fd-80e5-af02548622cd",
 							"host": [
 								"{{endpoint}}"
 							],
 							"path": [
 								"games",
-								"player_fe090bb0-6d2e-4ec1-ad86-95af1861d343"
+								"game_a1d0f722-008e-45fd-80e5-af02548622cd"
 							]
 						}
 					},
@@ -93,10 +93,19 @@
 						"header": [
 							{
 								"key": "Authorization",
-								"value": "Beare {{authToken}}",
+								"value": "Bearer {{authToken}}",
 								"type": "text"
 							}
 						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n\t\"opponentTeam\": \"the warriors\",\n    \"date\": \"2020-06-10\",\n    \"location\": \"Rohan\",\n    \"teamId\": \"team_721ec865-6f5e-4cc3-a463-66a5966dc8e5\",\n    \"teamScore\": 0,\n    \"opponentScore\": 5\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
 						"url": {
 							"raw": "{{endpoint}}/games/player_fe090bb0-6d2e-4ec1-ad86-95af1861d343",
 							"host": [
@@ -146,13 +155,13 @@
 							}
 						],
 						"url": {
-							"raw": "{{endpoint}}/teams/team_287d9159-69a0-4958-a413-b1b38f99fae7/games",
+							"raw": "{{endpoint}}/teams/team_721ec865-6f5e-4cc3-a463-66a5966dc8e5/games",
 							"host": [
 								"{{endpoint}}"
 							],
 							"path": [
 								"teams",
-								"team_287d9159-69a0-4958-a413-b1b38f99fae7",
+								"team_721ec865-6f5e-4cc3-a463-66a5966dc8e5",
 								"games"
 							]
 						}
@@ -200,13 +209,13 @@
 							}
 						],
 						"url": {
-							"raw": "{{endpoint}}/teams/team_5700082c-b65f-4115-b119-0674e8e6d095",
+							"raw": "{{endpoint}}/teams/team_142b4490-a7ef-420f-b2ee-62ad31b46a1f",
 							"host": [
 								"{{endpoint}}"
 							],
 							"path": [
 								"teams",
-								"team_5700082c-b65f-4115-b119-0674e8e6d095"
+								"team_142b4490-a7ef-420f-b2ee-62ad31b46a1f"
 							]
 						}
 					},
@@ -232,7 +241,7 @@
 						],
 						"body": {
 							"mode": "raw",
-							"raw": "{\n\t\"season\": \"2019\",\n\t\"name\": \"postman2\",\n\t\"sport\": \"Baseball\",\n\t\"retired\": false\n}"
+							"raw": "{\n\t\"season\": \"2020\",\n\t\"name\": \"red team\",\n\t\"sport\": \"football\",\n\t\"retired\": false\n}"
 						},
 						"url": {
 							"raw": "{{endpoint}}/teams",
@@ -258,13 +267,13 @@
 							}
 						],
 						"url": {
-							"raw": "{{endpoint}}/teams/team_5700082c-b65f-4115-b119-0674e8e6d095",
+							"raw": "{{endpoint}}/teams/team_142b4490-a7ef-420f-b2ee-62ad31b46a1f",
 							"host": [
 								"{{endpoint}}"
 							],
 							"path": [
 								"teams",
-								"team_5700082c-b65f-4115-b119-0674e8e6d095"
+								"team_142b4490-a7ef-420f-b2ee-62ad31b46a1f"
 							]
 						}
 					},
@@ -287,16 +296,16 @@
 						],
 						"body": {
 							"mode": "raw",
-							"raw": "{\n\t\"season\": \"2019\",\n\t\"name\": \"yellow postman\",\n\t\"sport\": \"football\",\n\t\"retired\": false\n}"
+							"raw": "{\n\t\"name\": \"Team Red\",\n    \"sport\": \"football\",\n    \"season\": \"2020\",\n    \"retired\": false\n}"
 						},
 						"url": {
-							"raw": "{{endpoint}}/teams/team_43ac3a92-c555-4e0e-8b25-ea3f1a19a6f5",
+							"raw": "{{endpoint}}/teams/team_142b4490-a7ef-420f-b2ee-62ad31b46a1f",
 							"host": [
 								"{{endpoint}}"
 							],
 							"path": [
 								"teams",
-								"team_43ac3a92-c555-4e0e-8b25-ea3f1a19a6f5"
+								"team_142b4490-a7ef-420f-b2ee-62ad31b46a1f"
 							]
 						}
 					},
@@ -314,14 +323,13 @@
 							}
 						],
 						"url": {
-							"raw": "{{endpoint}}/teams/attachment/team_5700082c-b65f-4115-b119-0674e8e6d095",
+							"raw": "{{endpoint}}/attachment/team_6f27d789-0d19-4d8b-946c-c4a8d48d1073",
 							"host": [
 								"{{endpoint}}"
 							],
 							"path": [
-								"teams",
 								"attachment",
-								"team_5700082c-b65f-4115-b119-0674e8e6d095"
+								"team_6f27d789-0d19-4d8b-946c-c4a8d48d1073"
 							]
 						}
 					},
@@ -373,7 +381,7 @@
 						],
 						"body": {
 							"mode": "raw",
-							"raw": "{\n\t\"teamId\": \"team_ac327e81-ac36-4a0b-b338-7810f1c9ad82\",\n    \"firstName\": \"fake\",\n    \"lastName\": \"Dark\",\n    \"yearOfBirth\": 2005\n}"
+							"raw": "{\n\t\"teamId\": \"team_6f27d789-0d19-4d8b-946c-c4a8d48d1073\",\n    \"firstName\": \"Frodo\",\n    \"lastName\": \"Baggins\",\n    \"yearOfBirth\": 2006,\n    \"jerseyNumber\": 13,\n    \"position\": \"goalie\"\n}"
 						},
 						"url": {
 							"raw": "{{endpoint}}/players",
@@ -399,13 +407,13 @@
 							}
 						],
 						"url": {
-							"raw": "{{endpoint}}/teams/team_287d9159-69a0-4958-a413-b1b38f99fae7/players",
+							"raw": "{{endpoint}}/teams/team_721ec865-6f5e-4cc3-a463-66a5966dc8e5/players",
 							"host": [
 								"{{endpoint}}"
 							],
 							"path": [
 								"teams",
-								"team_287d9159-69a0-4958-a413-b1b38f99fae7",
+								"team_721ec865-6f5e-4cc3-a463-66a5966dc8e5",
 								"players"
 							]
 						}
@@ -424,13 +432,13 @@
 							}
 						],
 						"url": {
-							"raw": "{{endpoint}}/players/player_3f67884b-58ed-4a33-8cc0-abe5646c07ba",
+							"raw": "{{endpoint}}/players/player_e68efbab-e34a-46f0-8772-89ee97a9d122",
 							"host": [
 								"{{endpoint}}"
 							],
 							"path": [
 								"players",
-								"player_3f67884b-58ed-4a33-8cc0-abe5646c07ba"
+								"player_e68efbab-e34a-46f0-8772-89ee97a9d122"
 							]
 						}
 					},
@@ -449,7 +457,7 @@
 						],
 						"body": {
 							"mode": "raw",
-							"raw": "{\n    \"lastName\": \"juju\",\n    \"position\": \"none\",\n    \"firstName\": \"valerian\",\n    \"jerseyNumber\": 12,\n    \"yearOfBirth\": 2011\n}",
+							"raw": "{\n    \"firstName\": \"Bilbo\",\n    \"lastName\": \"Baggins\",\n    \"teamId\": \"team_6f27d789-0d19-4d8b-946c-c4a8d48d1073\",\n    \"jerseyNumber\": 11,\n    \"position\": \"center\",\n    \"yearOfBirth\": 2006\n}\n",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -481,13 +489,13 @@
 							}
 						],
 						"url": {
-							"raw": "{{endpoint}}/players/player_fe090bb0-6d2e-4ec1-ad86-95af1861d343",
+							"raw": "{{endpoint}}/players/player_53922550-119f-4c38-9c4c-bc2098b8d01a",
 							"host": [
 								"{{endpoint}}"
 							],
 							"path": [
 								"players",
-								"player_fe090bb0-6d2e-4ec1-ad86-95af1861d343"
+								"player_53922550-119f-4c38-9c4c-bc2098b8d01a"
 							]
 						}
 					},
