@@ -30,6 +30,7 @@ interface EditGameState {
 export class EditGame extends React.PureComponent<EditGameProps, EditGameState> {
     state: EditGameState = {
         game: {
+            teamId: '',
             opponentTeam: '',
             opponentScore: 0,
             teamScore: 0,
@@ -48,10 +49,12 @@ export class EditGame extends React.PureComponent<EditGameProps, EditGameState> 
 
         if (id.startsWith('team')) {
             const game = { ...this.state.game }
+            game.teamId = this.props.match.params.Id
             this.setState(() => ({ game, teamId: this.props.match.params.Id, loading: false }))
         } else if (id.startsWith('game')) {
             const fetchedGame = await getGame(this.props.auth.getIdToken(), this.props.match.params.Id)
             const game: GameRequest = {
+                teamId: fetchedGame.GSI1,
                 opponentTeam: fetchedGame.opponentTeam,
                 teamScore: fetchedGame.teamScore,
                 opponentScore: fetchedGame.opponentScore,

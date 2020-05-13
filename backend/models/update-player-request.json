@@ -3,6 +3,9 @@
     "title": "team",
     "type": "object",
     "properties": {
+      "teamId": {
+        "type": "string"
+      },
       "firstName": {
         "type": "string"
       },

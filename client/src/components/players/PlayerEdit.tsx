@@ -29,6 +29,7 @@ interface EditPlayerState {
 export class EditPlayer extends React.PureComponent<EditPlayerProps, EditPlayerState> {
     state: EditPlayerState = {
         player: {
+            teamId: '',
             firstName: '',
             lastName: '',
             yearOfBirth: 1900,
@@ -47,10 +48,12 @@ export class EditPlayer extends React.PureComponent<EditPlayerProps, EditPlayerS
 
         if (id.startsWith('team')) {
             const player = { ...this.state.player }
+            player.teamId = this.props.match.params.Id
             this.setState(() => ({ player, teamId: this.props.match.params.Id, loading: false }))
         } else if (id.startsWith('player')) {
             const fetchedPlayer = await getPlayer(this.props.auth.getIdToken(), this.props.match.params.Id)
             const player: PlayerRequest = {
+                teamId: fetchedPlayer.GSI1,
                 firstName: fetchedPlayer.firstName,
                 lastName: fetchedPlayer.lastName,
                 yearOfBirth: fetchedPlayer.yearOfBirth,
