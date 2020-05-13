@@ -1,10 +1,8 @@
 import React from 'react'
 import { History } from 'history'
 import { Card, Image, Icon } from 'semantic-ui-react'
-
-// import Auth from '../../auth/Auth'
 import { TeamItem } from '../../types/teams'
-import { generateKeyPair } from 'crypto'
+
 
 interface TeamProps {
   team: TeamItem

@@ -47,7 +47,7 @@ export class EditGame extends React.PureComponent<EditGameProps, EditGameState> 
         const id = this.props.match.params.Id
 
         if (id.startsWith('team')) {
-            const game = { ...this.state.game, ['teamId']: this.props.match.params.Id }
+            const game = { ...this.state.game }
             this.setState(() => ({ game, teamId: this.props.match.params.Id, loading: false }))
         } else if (id.startsWith('game')) {
             const fetchedGame = await getGame(this.props.auth.getIdToken(), this.props.match.params.Id)
@@ -111,11 +111,11 @@ export class EditGame extends React.PureComponent<EditGameProps, EditGameState> 
             this.state.errors.push('Add a game date')
         }
 
-        if (this.state.game.teamScore === NaN) {
+        if (isNaN(this.state.game.teamScore)) {
             this.state.errors.push('Add team score or 0')
         }
 
-        if (this.state.game.opponentScore === NaN) {
+        if (isNaN(this.state.game.opponentScore)) {
             this.state.errors.push('Add opponent score or 0')
         }
     }

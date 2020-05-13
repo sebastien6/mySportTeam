@@ -1,6 +1,6 @@
 import React from 'react'
 import { History } from 'history'
-import { Card, Image, Icon } from 'semantic-ui-react'
+import { Card, Image } from 'semantic-ui-react'
 
 import Auth from '../../auth/Auth'
 import { PlayerItem } from '../../types/players'

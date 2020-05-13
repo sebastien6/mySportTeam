@@ -1,7 +1,6 @@
 import { History } from 'history'
 import * as React from 'react'
 import {
-  Card,
   Grid,
   Header,
   Icon,
@@ -22,7 +21,6 @@ import { PlayerItem } from '../../types/players'
 import { GameItem } from '../../types/games'
 import { PlayerCard } from '../players/PlayerCard'
 import { GameCard } from '../games/GameCard'
-import { deleteTeam } from '../../api/teams'
 
 interface TeamProps {
   match: {

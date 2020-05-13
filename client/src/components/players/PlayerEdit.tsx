@@ -46,7 +46,7 @@ export class EditPlayer extends React.PureComponent<EditPlayerProps, EditPlayerS
         const id = this.props.match.params.Id
 
         if (id.startsWith('team')) {
-            const player = { ...this.state.player, ['teamId']: this.props.match.params.Id }
+            const player = { ...this.state.player }
             this.setState(() => ({ player, teamId: this.props.match.params.Id, loading: false }))
         } else if (id.startsWith('player')) {
             const fetchedPlayer = await getPlayer(this.props.auth.getIdToken(), this.props.match.params.Id)
@@ -101,15 +101,15 @@ export class EditPlayer extends React.PureComponent<EditPlayerProps, EditPlayerS
             this.state.errors.push('Add player last name')
         }
 
-        if (this.state.player.yearOfBirth === NaN) {
+        if (isNaN(this.state.player.yearOfBirth)) {
             this.state.errors.push('Add player year of birth (YYYY)')
         }
 
-        if (this.state.player.lastName.length === 0) {
+        if (isNaN(this.state.player.lastName.length)) {
             this.state.errors.push('Add player position or none or N/A')
         }
 
-        if (this.state.player.yearOfBirth === NaN) {
+        if (isNaN(this.state.player.yearOfBirth)) {
             this.state.errors.push('Add player jersey number or 0')
         }
         

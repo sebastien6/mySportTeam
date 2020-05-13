@@ -1,12 +1,8 @@
 import { History } from 'history'
 import * as React from 'react'
 import {
-  Card,
   Grid,
   Header,
-  Icon,
-  Image,
-  Button,
   Divider,
   Loader,
   CardGroup

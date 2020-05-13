@@ -1,18 +1,14 @@
 import { History } from 'history'
 import * as React from 'react'
 import {
-  Card,
   Grid,
   Header,
-  Icon,
-  Image,
   Loader,
   CardGroup,
-  Button,
   Divider
 } from 'semantic-ui-react'
 
-import { getPlayers, getPlayer } from '../../api/players'
+import { getPlayers } from '../../api/players'
 import Auth from '../../auth/Auth'
 import { PlayerItem } from '../../types/players'
 import { PlayerCard } from './PlayerCard'
