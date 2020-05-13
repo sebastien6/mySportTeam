@@ -37,6 +37,51 @@ Open the collection and environemnt file in the postman folder in your postman a
 
 Note: use the web UI to generate a token by login into the app and update your postman enviroment with the updated token tu ensure successful API calls.
 
+### Create a team
+
+
+POST https://{{apiId}}.execute-api.us-east-1.amazonaws.com/dev/teams
+
+```
+{
+	"season": "2020",
+	"name": "Team Red",
+	"sport": "Baseball",
+	"retired": false
+}
+```
+
+
+### Get all Teams
+GET https://{{apiId}}.execute-api.us-east-1.amazonaws.com/dev/teams
+
+
+
+### Get a team
+GET https://{{apiId}}.execute-api.us-east-1.amazonaws.com/dev/teams/{teamId}
+
+### Update a team
+PATCH https://{{apiId}}.execute-api.us-east-1.amazonaws.com/dev/teams/{teamId}
+
+```
+{
+	"season": "2020",
+	"name": "Team Red",
+	"sport": "Baseball",
+	"retired": false
+}
+```
+
+### Delete a team
+DELETE https://{{apiId}}.execute-api.us-east-1.amazonaws.com/dev/teams/{teamId}
+
+
+### Get an attachment URL
+GET https://{{apiId}}.execute-api.us-east-1.amazonaws.com/dev/attachment/{id}
+
+base on the provided id, teamId, PlayerId, or GameId, the attachement is associated to the corresponding team, player or game.
+
+
 # How to run the app
 
 to run the App, go in the client folder and run the command
