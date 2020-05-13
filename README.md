@@ -175,9 +175,9 @@ GET https://{{apiId}}.execute-api.us-east-1.amazonaws.com/dev/attachment/{id}
 base on the provided id, teamId, PlayerId, or GameId, the attachement is associated to the corresponding team, player or game.
 
 
-# How to run the app
+# How to run the frontend app
 
-to run the App, go in the client folder and run the command
+to run the Frontend React UI App, go in the client folder and run the command
 
 ```
 yarn start // if you have yarn installed
@@ -187,6 +187,25 @@ or
 npm run start
 
 ```
+
+Prerequisite:
+- nodejs
+- react
+- yarn (optional)
+
+# How to deploy the backen app under your own AWS account
+
+to run the backen API under your own AWS account, go in the backend folder and run the command
+
+```
+sls deploy -v
+
+```
+
+Prerequisite:
+- serverless
+- nodejs
+- AWS cli (configured)
 
 
 # How to test the app
@@ -198,7 +217,13 @@ to test the backend app locally, go in the backend folder and run the command:
 sls offline start
 
 ```
-the configuration for serverless offiline includes:
+
+Prerequisite:
+- serverless
+- nodejs
+- AWS cli (configured)
+
+the configuration for serverless offline includes:
 - offline-dynamodb
 - offline-s3
 - offline SNS
