@@ -31,3 +31,38 @@ by clicking on a player or a game card, the user can access the player, or game 
 
 when user click on save, the user is bring back to its previous screen.
 
+# Rest API
+
+Open the collection and environemnt file in the postman folder in your postman application to see the available API calls.
+
+Note: use the web UI to generate a token by login into the app and update your postman enviroment with the updated token tu ensure successful API calls.
+
+# How to run the app
+
+to run the App, go in the client folder and run the command
+
+```
+yarn start // if you have yarn installed
+
+or
+
+npm run start
+
+```
+
+
+# How to test the app
+
+to test the backend app locally, go in the backend folder and run the command:
+
+
+```
+sls offline start
+
+```
+the configuration for serverless offiline includes:
+- offline-dynamodb
+- offline-s3
+- offline SNS
+
+the postman collection file contain a folder for call to the offline API.

@@ -1,0 +1,1078 @@
+{
+	"info": {
+		"_postman_id": "5683c16a-37e7-4721-b400-b33cc2681274",
+		"name": "MySportTeam",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "games",
+			"item": [
+				{
+					"name": "Get All Games",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer {{authToken}}",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "{{endpoint}}/games",
+							"host": [
+								"{{endpoint}}"
+							],
+							"path": [
+								"games"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "create game",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							},
+							{
+								"key": "Authorization",
+								"value": "Beare {{authToken}}",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n\t\"teamId\": \"team_287d9159-69a0-4958-a413-b1b38f99fae7\",\n    \"firstName\": \"Frodo\",\n    \"lastName\": \"Baggins\",\n    \"yearOfBirth\": 2006,\n    \"jerseyNumber\": 13,\n    \"position\": \"defense\"\n}"
+						},
+						"url": {
+							"raw": "{{endpoint}}/games",
+							"host": [
+								"{{endpoint}}"
+							],
+							"path": [
+								"games"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get a game",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Beare {{authToken}}",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "{{endpoint}}/games/player_fe090bb0-6d2e-4ec1-ad86-95af1861d343",
+							"host": [
+								"{{endpoint}}"
+							],
+							"path": [
+								"games",
+								"player_fe090bb0-6d2e-4ec1-ad86-95af1861d343"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Update a game",
+					"request": {
+						"method": "PATCH",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Beare {{authToken}}",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "{{endpoint}}/games/player_fe090bb0-6d2e-4ec1-ad86-95af1861d343",
+							"host": [
+								"{{endpoint}}"
+							],
+							"path": [
+								"games",
+								"player_fe090bb0-6d2e-4ec1-ad86-95af1861d343"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Delete a game",
+					"request": {
+						"method": "DELETE",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Beare {{authToken}}",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "{{endpoint}}/games/player_fe090bb0-6d2e-4ec1-ad86-95af1861d343",
+							"host": [
+								"{{endpoint}}"
+							],
+							"path": [
+								"games",
+								"player_fe090bb0-6d2e-4ec1-ad86-95af1861d343"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get all games for a team",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Beare {{authToken}}",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "{{endpoint}}/teams/team_287d9159-69a0-4958-a413-b1b38f99fae7/games",
+							"host": [
+								"{{endpoint}}"
+							],
+							"path": [
+								"teams",
+								"team_287d9159-69a0-4958-a413-b1b38f99fae7",
+								"games"
+							]
+						}
+					},
+					"response": []
+				}
+			],
+			"protocolProfileBehavior": {}
+		},
+		{
+			"name": "teams",
+			"item": [
+				{
+					"name": "Get All Teams",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer {{authToken}}",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "{{endpoint}}/teams",
+							"host": [
+								"{{endpoint}}"
+							],
+							"path": [
+								"teams"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get a team",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer {{authToken}}",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "{{endpoint}}/teams/team_5700082c-b65f-4115-b119-0674e8e6d095",
+							"host": [
+								"{{endpoint}}"
+							],
+							"path": [
+								"teams",
+								"team_5700082c-b65f-4115-b119-0674e8e6d095"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Create a team",
+					"request": {
+						"auth": {
+							"type": "noauth"
+						},
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							},
+							{
+								"key": "Authorization",
+								"value": "Bearer {{authToken}}",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n\t\"season\": \"2019\",\n\t\"name\": \"postman2\",\n\t\"sport\": \"Baseball\",\n\t\"retired\": false\n}"
+						},
+						"url": {
+							"raw": "{{endpoint}}/teams",
+							"host": [
+								"{{endpoint}}"
+							],
+							"path": [
+								"teams"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Delete a team",
+					"request": {
+						"method": "DELETE",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer {{authToken}}",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "{{endpoint}}/teams/team_5700082c-b65f-4115-b119-0674e8e6d095",
+							"host": [
+								"{{endpoint}}"
+							],
+							"path": [
+								"teams",
+								"team_5700082c-b65f-4115-b119-0674e8e6d095"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Update a team",
+					"request": {
+						"method": "PATCH",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							},
+							{
+								"key": "Authorization",
+								"value": "Bearer {{authToken}}",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n\t\"season\": \"2019\",\n\t\"name\": \"yellow postman\",\n\t\"sport\": \"football\",\n\t\"retired\": false\n}"
+						},
+						"url": {
+							"raw": "{{endpoint}}/teams/team_43ac3a92-c555-4e0e-8b25-ea3f1a19a6f5",
+							"host": [
+								"{{endpoint}}"
+							],
+							"path": [
+								"teams",
+								"team_43ac3a92-c555-4e0e-8b25-ea3f1a19a6f5"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get team attachment URL",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer {{authToken}}",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "{{endpoint}}/teams/attachment/team_5700082c-b65f-4115-b119-0674e8e6d095",
+							"host": [
+								"{{endpoint}}"
+							],
+							"path": [
+								"teams",
+								"attachment",
+								"team_5700082c-b65f-4115-b119-0674e8e6d095"
+							]
+						}
+					},
+					"response": []
+				}
+			],
+			"protocolProfileBehavior": {}
+		},
+		{
+			"name": "players",
+			"item": [
+				{
+					"name": "Get all players",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer {{authToken}}",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "{{endpoint}}/players",
+							"host": [
+								"{{endpoint}}"
+							],
+							"path": [
+								"players"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Create a player",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							},
+							{
+								"key": "Authorization",
+								"value": "Bearer {{authToken}}",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n\t\"teamId\": \"team_ac327e81-ac36-4a0b-b338-7810f1c9ad82\",\n    \"firstName\": \"fake\",\n    \"lastName\": \"Dark\",\n    \"yearOfBirth\": 2005\n}"
+						},
+						"url": {
+							"raw": "{{endpoint}}/players",
+							"host": [
+								"{{endpoint}}"
+							],
+							"path": [
+								"players"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get team with all players",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer {{authToken}}",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "{{endpoint}}/teams/team_287d9159-69a0-4958-a413-b1b38f99fae7/players",
+							"host": [
+								"{{endpoint}}"
+							],
+							"path": [
+								"teams",
+								"team_287d9159-69a0-4958-a413-b1b38f99fae7",
+								"players"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get a player",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer {{authToken}}",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "{{endpoint}}/players/player_3f67884b-58ed-4a33-8cc0-abe5646c07ba",
+							"host": [
+								"{{endpoint}}"
+							],
+							"path": [
+								"players",
+								"player_3f67884b-58ed-4a33-8cc0-abe5646c07ba"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Update a player",
+					"request": {
+						"method": "PATCH",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer {{authToken}}",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"lastName\": \"juju\",\n    \"position\": \"none\",\n    \"firstName\": \"valerian\",\n    \"jerseyNumber\": 12,\n    \"yearOfBirth\": 2011\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{endpoint}}/players/player_53922550-119f-4c38-9c4c-bc2098b8d01a",
+							"host": [
+								"{{endpoint}}"
+							],
+							"path": [
+								"players",
+								"player_53922550-119f-4c38-9c4c-bc2098b8d01a"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Delete a player",
+					"request": {
+						"method": "DELETE",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer {{authToken}}",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "{{endpoint}}/players/player_fe090bb0-6d2e-4ec1-ad86-95af1861d343",
+							"host": [
+								"{{endpoint}}"
+							],
+							"path": [
+								"players",
+								"player_fe090bb0-6d2e-4ec1-ad86-95af1861d343"
+							]
+						}
+					},
+					"response": []
+				}
+			],
+			"protocolProfileBehavior": {}
+		},
+		{
+			"name": "offline",
+			"item": [
+				{
+					"name": "teams",
+					"item": [
+						{
+							"name": "Get All Teams",
+							"request": {
+								"method": "GET",
+								"header": [
+									{
+										"key": "Authorization",
+										"value": "Bearer {{authToken}}",
+										"type": "text"
+									}
+								],
+								"url": {
+									"raw": "{{offlineUrl}}/teams",
+									"host": [
+										"{{offlineUrl}}"
+									],
+									"path": [
+										"teams"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Create team",
+							"request": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "Content-Type",
+										"value": "application/json"
+									},
+									{
+										"key": "Authorization",
+										"value": "Beare {{authToken}}",
+										"type": "text"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n  \"name\": \"Mirage\",\n  \"sport\": \"Ringette\",\n  \"season\": \"2019\"\n}"
+								},
+								"url": {
+									"raw": "{{offlineUrl}}/teams",
+									"host": [
+										"{{offlineUrl}}"
+									],
+									"path": [
+										"teams"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "delete team",
+							"request": {
+								"method": "DELETE",
+								"header": [
+									{
+										"key": "Authorization",
+										"value": "Beare {{authToken}}",
+										"type": "text"
+									}
+								],
+								"url": {
+									"raw": "{{offlineUrl}}/teams/team_287d9159-69a0-4958-a413-b1b38f99gt8u",
+									"host": [
+										"{{offlineUrl}}"
+									],
+									"path": [
+										"teams",
+										"team_287d9159-69a0-4958-a413-b1b38f99gt8u"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "update team",
+							"request": {
+								"method": "PATCH",
+								"header": [
+									{
+										"key": "Content-Type",
+										"value": "application/json"
+									},
+									{
+										"key": "Authorization",
+										"value": "Beare {{authToken}}",
+										"type": "text"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n\t\"season\": \"2020\",\n    \"name\": \"the fellowship\",\n    \"retired\": false,\n    \"sport\": \"hockey\"\n}"
+								},
+								"url": {
+									"raw": "{{offlineUrl}}/teams/team_287d9159-69a0-4958-a413-b1b38f99fae7",
+									"host": [
+										"{{offlineUrl}}"
+									],
+									"path": [
+										"teams",
+										"team_287d9159-69a0-4958-a413-b1b38f99fae7"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Get a team",
+							"request": {
+								"method": "GET",
+								"header": [
+									{
+										"key": "Authorization",
+										"value": "Beare {{authToken}}",
+										"type": "text"
+									}
+								],
+								"url": {
+									"raw": "{{offlineUrl}}/teams/team_0c11415f-95d9-4ba5-be5c-6c384ae86f1c",
+									"host": [
+										"{{offlineUrl}}"
+									],
+									"path": [
+										"teams",
+										"team_0c11415f-95d9-4ba5-be5c-6c384ae86f1c"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Get Team attachment URL",
+							"request": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "Authorization",
+										"value": "Beare {{authToken}}",
+										"type": "text"
+									}
+								],
+								"url": {
+									"raw": "{{offlineUrl}}/attachment/team_0c11415f-95d9-4ba5-be5c-6c384ae86f1c",
+									"host": [
+										"{{offlineUrl}}"
+									],
+									"path": [
+										"attachment",
+										"team_0c11415f-95d9-4ba5-be5c-6c384ae86f1c"
+									]
+								}
+							},
+							"response": []
+						}
+					],
+					"protocolProfileBehavior": {},
+					"_postman_isSubFolder": true
+				},
+				{
+					"name": "players",
+					"item": [
+						{
+							"name": "Get All Players",
+							"request": {
+								"method": "GET",
+								"header": [
+									{
+										"key": "Authorization",
+										"value": "Beare {{authToken}}",
+										"type": "text"
+									}
+								],
+								"url": {
+									"raw": "{{offlineUrl}}/players",
+									"host": [
+										"{{offlineUrl}}"
+									],
+									"path": [
+										"players"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "create player",
+							"request": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "Content-Type",
+										"value": "application/json"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n\t\"teamId\": \"team_287d9159-69a0-4958-a413-b1b38f99fae7\",\n    \"firstName\": \"Pippin\",\n    \"lastName\": \"Took\",\n    \"yearOfBirth\": 2006\n}"
+								},
+								"url": {
+									"raw": "{{offlineUrl}}/players",
+									"host": [
+										"{{offlineUrl}}"
+									],
+									"path": [
+										"players"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "create player failure (bad teamId)",
+							"request": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "Content-Type",
+										"value": "application/json"
+									},
+									{
+										"key": "Authorization",
+										"value": "Beare {{authToken}}",
+										"type": "text"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n\t\"teamId\": \"team_12345\",\n    \"firstName\": \"Pippin\",\n    \"lastName\": \"Took\",\n    \"yearOfBirth\": 2006,\n    \"position\": \"center\",\n    \"jerseyNumber\": 7\n}"
+								},
+								"url": {
+									"raw": "{{offlineUrl}}/players",
+									"host": [
+										"{{offlineUrl}}"
+									],
+									"path": [
+										"players"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Get a player",
+							"request": {
+								"method": "GET",
+								"header": [
+									{
+										"key": "Authorization",
+										"value": "Beare {{authToken}}",
+										"type": "text"
+									}
+								],
+								"url": {
+									"raw": "{{offlineUrl}}/players/player_00e29602-bfe7-47ce-a596-3a912f032ad7",
+									"host": [
+										"{{offlineUrl}}"
+									],
+									"path": [
+										"players",
+										"player_00e29602-bfe7-47ce-a596-3a912f032ad7"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Update a player",
+							"request": {
+								"method": "PATCH",
+								"header": [
+									{
+										"key": "Content-Type",
+										"value": "application/json"
+									},
+									{
+										"key": "Authorization",
+										"value": "Beare {{authToken}}",
+										"type": "text"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n    \"firstName\": \"Bilbo\",\n    \"lastName\": \"Baggins\",\n    \"teamId\": \"player_00e29602-bfe7-47ce-a596-3a912f032ad7\",\n    \"jerseyNumber\": 11,\n    \"position\": \"center\",\n    \"yearOfBirth\": 2006\n}"
+								},
+								"url": {
+									"raw": "{{offlineUrl}}/players/player_00e29602-bfe7-47ce-a596-3a912f032ad7",
+									"host": [
+										"{{offlineUrl}}"
+									],
+									"path": [
+										"players",
+										"player_00e29602-bfe7-47ce-a596-3a912f032ad7"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Delete a player",
+							"request": {
+								"method": "DELETE",
+								"header": [
+									{
+										"key": "Authorization",
+										"value": "Beare {{authToken}}",
+										"type": "text"
+									}
+								],
+								"url": {
+									"raw": "{{offlineUrl}}/players/player_fe090bb0-95d9-4ba5-ad86-95a1635d343",
+									"host": [
+										"{{offlineUrl}}"
+									],
+									"path": [
+										"players",
+										"player_fe090bb0-95d9-4ba5-ad86-95a1635d343"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Get team with all players",
+							"request": {
+								"method": "GET",
+								"header": [
+									{
+										"key": "Authorization",
+										"value": "Beare {{authToken}}",
+										"type": "text"
+									}
+								],
+								"url": {
+									"raw": "{{offlineUrl}}/teams/team_287d9159-69a0-4958-a413-b1b38f99fae7/players",
+									"host": [
+										"{{offlineUrl}}"
+									],
+									"path": [
+										"teams",
+										"team_287d9159-69a0-4958-a413-b1b38f99fae7",
+										"players"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Get Player attachment url",
+							"request": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "Authorization",
+										"value": "Beare {{authToken}}",
+										"type": "text"
+									}
+								],
+								"url": {
+									"raw": "{{offlineUrl}}/attachment/player_00e29602-bfe7-47ce-a596-3a912f032ad7",
+									"host": [
+										"{{offlineUrl}}"
+									],
+									"path": [
+										"attachment",
+										"player_00e29602-bfe7-47ce-a596-3a912f032ad7"
+									]
+								}
+							},
+							"response": []
+						}
+					],
+					"protocolProfileBehavior": {},
+					"_postman_isSubFolder": true
+				},
+				{
+					"name": "games",
+					"item": [
+						{
+							"name": "Get All Games",
+							"request": {
+								"method": "GET",
+								"header": [
+									{
+										"key": "auth",
+										"value": "Beare {{authToken}}",
+										"type": "text"
+									}
+								],
+								"url": {
+									"raw": "{{offlineUrl}}/games",
+									"host": [
+										"{{offlineUrl}}"
+									],
+									"path": [
+										"games"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "create game",
+							"request": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "Content-Type",
+										"value": "application/json"
+									},
+									{
+										"key": "Authorization",
+										"value": "Beare {{authToken}}",
+										"type": "text"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n\t\"teamId\": \"team_0c11415f-95d9-4ba5-be5c-6c384ae86f1c\",\n    \"opponentTeam\": \"The Blusters\",\n    \"date\": \"January 15, 1995\",\n    \"location\": \"Chicago\",\n    \"teamScore\": 9,\n    \"opponentScore\": 1\n}"
+								},
+								"url": {
+									"raw": "{{offlineUrl}}/games",
+									"host": [
+										"{{offlineUrl}}"
+									],
+									"path": [
+										"games"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Get a game",
+							"request": {
+								"method": "GET",
+								"header": [
+									{
+										"key": "Authorization",
+										"value": "Beare {{authToken}}",
+										"type": "text"
+									}
+								],
+								"url": {
+									"raw": "{{offlineUrl}}/games/game_b8a2bc43-39aa-45dc-b159-018881d19fdd",
+									"host": [
+										"{{offlineUrl}}"
+									],
+									"path": [
+										"games",
+										"game_b8a2bc43-39aa-45dc-b159-018881d19fdd"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Update a game",
+							"request": {
+								"method": "PATCH",
+								"header": [
+									{
+										"key": "Content-Type",
+										"value": "application/json"
+									},
+									{
+										"key": "Authorization",
+										"value": "Beare {{authToken}}",
+										"type": "text"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n\t\"teamId\": \"team_0c11415f-95d9-4ba5-be5c-6c384ae86f1c\",\n\t\"date\": \"May 12, 2020\",\n    \"createdAt\": \"2020-05-06T23:37:39.136Z\",\n    \"opponentTeam\": \"the elves\",\n    \"location\": \"Toronto\",\n    \"teamScore\": 1,\n\t\"opponentScore\": 1,\n}"
+								},
+								"url": {
+									"raw": "{{offlineUrl}}/games/game_90da351d-da3b-4360-abb3-69e5082d4506",
+									"host": [
+										"{{offlineUrl}}"
+									],
+									"path": [
+										"games",
+										"game_90da351d-da3b-4360-abb3-69e5082d4506"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Delete a game",
+							"request": {
+								"method": "DELETE",
+								"header": [
+									{
+										"key": "Authorization",
+										"value": "Beare {{authToken}}",
+										"type": "text"
+									}
+								],
+								"url": {
+									"raw": "{{offlineUrl}}/games/game_23ac25d9-6eec-4cce-a9b9-897d8eceb51f",
+									"host": [
+										"{{offlineUrl}}"
+									],
+									"path": [
+										"games",
+										"game_23ac25d9-6eec-4cce-a9b9-897d8eceb51f"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Get all games for a team",
+							"request": {
+								"method": "GET",
+								"header": [
+									{
+										"key": "Authorization",
+										"value": "Beare {{authToken}}",
+										"type": "text"
+									}
+								],
+								"url": {
+									"raw": "{{offlineUrl}}/teams/team_287d9159-69a0-4958-a413-b1b38f99fae7/games",
+									"host": [
+										"{{offlineUrl}}"
+									],
+									"path": [
+										"teams",
+										"team_287d9159-69a0-4958-a413-b1b38f99fae7",
+										"games"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Get Game attachment url",
+							"request": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "Authorization",
+										"value": "Beare {{authToken}}",
+										"type": "text"
+									}
+								],
+								"url": {
+									"raw": "{{offlineUrl}}/attachment/game_90da351d-da3b-4360-abb3-69e5082d4506",
+									"host": [
+										"{{offlineUrl}}"
+									],
+									"path": [
+										"attachment",
+										"game_90da351d-da3b-4360-abb3-69e5082d4506"
+									]
+								}
+							},
+							"response": []
+						}
+					],
+					"protocolProfileBehavior": {},
+					"_postman_isSubFolder": true
+				}
+			],
+			"protocolProfileBehavior": {}
+		}
+	],
+	"protocolProfileBehavior": {}
+}
