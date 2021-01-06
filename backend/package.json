@@ -5,7 +5,7 @@
   "dependencies": {
     "@types/http-errors": "^1.6.3",
     "aws-xray-sdk": "^3.0.0",
-    "axios": "^0.19.2",
+    "axios": "^0.21.1",
     "elasticsearch": "^16.7.1",
     "http-aws-es": "^6.0.0",
     "http-errors": "^1.7.3",
